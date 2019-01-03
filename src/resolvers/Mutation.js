@@ -14,5 +14,19 @@ const Mutation = {
       token: sign({ userId: user.id }, APP_SECRET),
       user
     };
+  },
+  login: async (parent, { email, password }, ctx) => {
+      const user = await ctx.prisma.user({ email });
+      if(!user) {
+          throw new Error(`No user with email:${email}`)
+      }
+      const validPassword = await compare(password, user.password)
+      if(!validPassword) {
+          throw new Error('Invalid password')
+      }
+      return {
+        token: sign({ userId: user.id }, APP_SECRET),
+        user
+      }
   }
 };
