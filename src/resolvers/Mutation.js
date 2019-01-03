@@ -28,6 +28,14 @@ const Mutation = {
         token: sign({ userId: user.id }, APP_SECRET),
         user
       }
+  },
+  createPost: async (parent, { title, content }, ctx) => {
+      const userId = await getUserId(ctx);
+      return ctx.prisma.createPost({
+          title,
+          content,
+          author: { connect: { id: userId }}
+      })
   }
 };
 
