@@ -1,0 +1,14 @@
+{
+  "name": "newsfeed",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MichaelCheco/news-feed.git",
+  "author": "Michael Checo <checomichael2@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "graphql-yoga": "^1.16.9",
+    "jsonwebtoken": "^8.4.0",
+    "prisma-client-lib": "^1.23.3"
+  }
+}
