@@ -1,0 +1,11 @@
+scalar DateTime
+
+type Query {
+    me: User
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
