@@ -36,6 +36,9 @@ const Mutation = {
           content,
           author: { connect: { id: userId }}
       })
+  },
+  deletePost: async (parent, { id }, ctx) => {
+      return ctx.prisma.deletePost({ id })
   }
 };
 
