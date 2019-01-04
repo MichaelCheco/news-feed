@@ -5,6 +5,9 @@ const Query = {
         const userId = getUserId(ctx)
         return ctx.prisma.user({ id: userId})
     },
+    users: (parent, args, ctx) => {
+        return ctx.prisma.users()
+    },
     feed: (parent, args, ctx) => {
         return ctx.prisma.posts()
     },
