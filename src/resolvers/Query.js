@@ -7,6 +7,20 @@ const Query = {
     },
     feed: (parent, args, ctx) => {
         return ctx.prisma.posts()
+    },
+    filterPosts: (parent,{ searchString }, ctx) => {
+        return ctx.prisma.posts({
+            where: {
+                OR: [
+                    {
+                        title_contains: searchString
+                    },
+                    {
+                        content_contains: searchString
+                    }
+                ]
+            }
+        })
     }
 }
 
