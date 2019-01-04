@@ -12,6 +12,10 @@ type Mutation {
   createPost(title: String! content: String!): Post!
 }
 
+type Subscription {
+  post: Post
+}
+
 type User {
   id: ID!
   name: String!
