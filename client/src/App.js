@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Login from './components/Login'
 import Posts from './components/Posts'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
       <div className="App">
-        <Login />
-        <Posts />
+        <Switch>
+      <Route path="/login" component={Login} />
+      <Route path="/" component={Posts} />
+      </Switch>
       </div>
       </BrowserRouter>
     );
