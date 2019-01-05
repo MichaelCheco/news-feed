@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './components/Login'
 import Posts from './components/Posts'
+import DetailPage from './components/DetailPage'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 class App extends Component {
   render() {
@@ -9,7 +10,8 @@ class App extends Component {
       <div className="App">
         <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/" component={Posts} />
+      <Route exact path="/" component={Posts} />
+      <Route path="/post/:id" component={DetailPage} />
       </Switch>
       </div>
       </BrowserRouter>

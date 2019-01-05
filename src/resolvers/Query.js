@@ -11,6 +11,9 @@ const Query = {
     feed: (parent, args, ctx) => {
         return ctx.prisma.posts()
     },
+    post: (parent, { id }, ctx) => {
+        return ctx.prisma.post({ id })
+      },
     filterPosts: (parent,{ searchString }, ctx) => {
         return ctx.prisma.posts({
             where: {
