@@ -10,6 +10,7 @@ class Header extends Component {
                 <h2>NewsFeed</h2>
                 <Link to="/login">Login</Link>
                 <Link to ="/">Feed</Link>
+                <Link to ="/search">Search</Link>
                 {authToken && (
                     <Link to="/create">Create</Link>
                 )}
