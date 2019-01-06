@@ -85,7 +85,6 @@ class Create extends PureComponent {
             <Container>
               <form
                 onSubmit={async e => {
-                  console.log("CREATE", CREATE_POST_MUTATION);
                   e.preventDefault();
                   const { title, content } = this.state;
                   await createPost({

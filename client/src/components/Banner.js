@@ -61,10 +61,9 @@ const Button = styled.div`
 `;
 const LinkStyles = styled.div`
   font-size: 17px;
+  margin-top: 9px;
   width: 70px;
   height: 40px;
-  padding: 5px;
-
   text-decoration: underline;
 
   a {
@@ -88,7 +87,9 @@ class Banner extends Component {
         </LogoWrapper>
         <Auth>
           <LinkStyles>
-            <Link to="/login">Login </Link>
+            <Link to="/login">
+              <i class="fas fa-sign-in-alt"> Login</i>{" "}
+            </Link>
           </LinkStyles>{" "}
           <Button
             onClick={() => {
@@ -96,7 +97,7 @@ class Banner extends Component {
               this.props.history.push("/login");
             }}
           >
-            Logout
+            <i class="fas fa-sign-out-alt">Logout</i>
           </Button>
         </Auth>
       </Top>

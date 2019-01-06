@@ -63,7 +63,6 @@ class Posts extends Component {
       <Container>
         <Query query={POSTS_QUERY}>
           {({ loading, error, data, subscribeToMore }) => {
-            console.log(data, "DATA");
             if (loading) return <CubeGrid size={90} color={props => props.theme.red} />;
             if (error) return <h3>Error:`${error}` . . .</h3>;
             this._subscribeToNewPosts(subscribeToMore)

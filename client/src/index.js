@@ -28,6 +28,7 @@ const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000`,
   options: {
     reconnect: true,
+    lazy: true,
     connectionParams: {
       authToken: localStorage.getItem(AUTH_TOKEN),
     }
