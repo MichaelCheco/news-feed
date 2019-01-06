@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { withApollo, Mutation } from "react-apollo";
 import { withRouter } from 'react-router'
 import gql from "graphql-tag";

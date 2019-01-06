@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Post from "./Post";
+import { CubeGrid } from 'styled-spinkit'
 import styled from "styled-components";
 const Container = styled.div`
   display: grid;
@@ -63,7 +64,7 @@ class Posts extends Component {
         <Query query={POSTS_QUERY}>
           {({ loading, error, data, subscribeToMore }) => {
             console.log(data, "DATA");
-            if (loading) return <h3>Loading . . .</h3>;
+            if (loading) return <CubeGrid size={90} color={props => props.theme.red} />;
             if (error) return <h3>Error:`${error}` . . .</h3>;
             this._subscribeToNewPosts(subscribeToMore)
             const posts = data.feed;

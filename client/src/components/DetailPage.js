@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Query } from "react-apollo";
-import gql from 'graphql-tag'
-import { withRouter } from 'react-router'
+import gql from "graphql-tag";
+import { withRouter } from "react-router";
 import styled from "styled-components";
+import { CubeGrid } from "styled-spinkit";
+
 const Container = styled.div`
   display: grid;
   overflow: scroll;
@@ -14,7 +16,7 @@ const Container = styled.div`
   border-radius: 3px;
 `;
 const Div = styled.div`
-    padding: 15px;
+  padding: 15px;
 `;
 const POST_QUERY = gql`
   query PostQuery($id: ID!) {
@@ -25,23 +27,29 @@ const POST_QUERY = gql`
       published
     }
   }
-`
+`;
 class DetailPage extends Component {
-    render() { 
-        return ( 
-                <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
-                    {({ data, loading, error}) => {
-                        if (error) return <h3>Error . . .</h3>
-                        return (
-                            <Container>
-                               {loading ? <h3>Loading . . .</h3> : <Div><h2>{data.post.title}</h2>
-                                <p>{data.post.content}</p></Div>}
-                            </Container>
-                        )
-                    }}
-                </Query>
-         );
-    }
+  render() {
+    return (
+      <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
+        {({ data, loading, error }) => {
+          if (error) return <h3>Error . . .</h3>;
+          return (
+            <Container>
+              {loading ? (
+                <CubeGrid size={90} color={props => props.theme.red} />
+              ) : (
+                <Div>
+                  <h2>{data.post.title}</h2>
+                  <p>{data.post.content}</p>
+                </Div>
+              )}
+            </Container>
+          );
+        }}
+      </Query>
+    );
+  }
 }
- 
+
 export default withRouter(DetailPage);

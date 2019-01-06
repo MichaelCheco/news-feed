@@ -6,7 +6,7 @@ import Header from "./Header";
 import Search from "./Search";
 import Create from "./Create";
 import Banner from './Banner'
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 const Container = styled.div`
   margin: 0px;

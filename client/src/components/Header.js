@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { AUTH_TOKEN } from "../constants";
 import { withRouter } from "react-router";
@@ -12,9 +12,6 @@ const MyHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`;
-const H2 = styled.h2`
-    width: 30%;
 `;
 const Nav = styled.div`
     width: 50%;
