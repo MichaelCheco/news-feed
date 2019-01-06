@@ -5,8 +5,21 @@ import DetailPage from "./DetailPage";
 import Header from "./Header";
 import Search from "./Search";
 import Create from "./Create";
-import { Route, Switch } from "react-router-dom";
+import Banner from './Banner'
+import img from '../images/1.jpg'
+import { Route, Switch, Link } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+const Container = styled.div`
+  margin: 0px;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-gap: 0;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 100px 50px 2fr 1fr;
+`;
+
+
 const theme = {
   darkBlue: "#004466",
   mediumBlue: "#036699",
@@ -23,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: inherit;
     }
     body {
+      background: whitesmoke;
         padding: 0;
         margin: 0;
         font-size: 1.5rem;
@@ -35,7 +49,8 @@ const GlobalStyle = createGlobalStyle`
       }
     a {
         text-decoration: none;
-        color: ${theme.black};
+        color: white;
+
     }
 `;
 
@@ -45,7 +60,8 @@ class App extends Component {
       <Fragment>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
-          <div className="App">
+          <Container>
+          <Banner />
             <Header />
             <Switch>
               <Route path="/login" component={Login} />
@@ -54,7 +70,7 @@ class App extends Component {
               <Route path="/post/:id" component={DetailPage} />
               <Route path="/create" component={Create} />
             </Switch>
-          </div>
+          </Container>
         </ThemeProvider>
       </Fragment>
     );
