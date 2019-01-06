@@ -13,6 +13,9 @@ const Container = styled.div`
   border: 1px solid grey;
   border-radius: 3px;
 `;
+const Div = styled.div`
+    padding: 15px;
+`;
 const POST_QUERY = gql`
   query PostQuery($id: ID!) {
     post(id: $id) {
@@ -31,8 +34,8 @@ class DetailPage extends Component {
                         if (error) return <h3>Error . . .</h3>
                         return (
                             <Container>
-                               {loading ? <h3>Loading . . .</h3> : <div><h2>{data.post.title}</h2>
-                                <p>{data.post.content}</p></div>}
+                               {loading ? <h3>Loading . . .</h3> : <Div><h2>{data.post.title}</h2>
+                                <p>{data.post.content}</p></Div>}
                             </Container>
                         )
                     }}

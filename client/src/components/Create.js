@@ -28,7 +28,7 @@ const Textarea = styled.textarea`
 `;
 const Button = styled.button`
   margin-top: 10px;
-  margin-left: 18px;
+  margin-left: 15px;
   border-radius: 5px;
   font-size: 24px;
   width: 200px;
@@ -44,8 +44,15 @@ const Button = styled.button`
     outline: 0;
   }
 `;
-const H1 = styled.h1`
-  margin-left: 17px;
+const Input = styled.input`
+  width: 90%;
+  margin-left: 15px;
+  margin-top: 35px;
+  height: 50px;
+  font-size: 20px;
+  :focus {
+    outline: 0;
+  }
 `;
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($title: String!, $content: String!) {
@@ -58,15 +65,6 @@ const CREATE_POST_MUTATION = gql`
         name
       }
     }
-  }
-`;
-const Input = styled.input`
-  width: 90%;
-  margin-left: 15px;
-  height: 50px;
-  font-size: 20px;
-  :focus {
-    outline: 0;
   }
 `;
 
@@ -96,7 +94,6 @@ class Create extends PureComponent {
                   this.props.history.push('/')
                 }}
               >
-                <H1>Create Post</H1>
                 <InputWrapper>
                   <Input
                     autoFocus

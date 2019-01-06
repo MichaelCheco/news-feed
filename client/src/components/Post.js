@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { timeDifferenceForDate } from '../utils'
 const Container = styled.div`
   display: grid;
   background: white;
@@ -54,14 +55,14 @@ const ButtonDiv = styled.div`
 `;
 export default class Post extends Component {
   render() {
-      const { title, content } = this.props.post
+      const { title, content, createdAt } = this.props.post
     console.log(this.props, "cccccc");
     return (
       <Container>
           <Content>
             <H2>{title}</H2>
             <P>{content}</P>
-            <Author>Posted By {this.props.post.author.name}</Author>
+            <Author>Posted By {this.props.post.author.name} {timeDifferenceForDate(createdAt)}</Author>
           </Content>
           <ButtonDiv>
           <Button>
