@@ -27,17 +27,45 @@ const POSTS_QUERY = gql`
     }
   }
 `;
+const NEW_POSTS_SUBSCRIPTION = gql`
+  subscription {
+    post {
+        id
+        title
+        content
+        published
+        createdAt
+        author {
+          name
+        }
+      }
+    }
+`
 
 class Posts extends Component {
-  state = {};
+  _subscribeToNewPosts = async subscribeToMore => {
+    subscribeToMore({
+      document: NEW_POSTS_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev
+        const newPost = subscriptionData.data.posts
+        return Object.assign({}, prev, {
+          feed: [newPost, ...prev.feed],
+          __typename: prev.feed.__typename
+          
+        })
+      }
+    })
+  }
   render() {
     return (
       <Container>
         <Query query={POSTS_QUERY}>
-          {({ loading, error, data, refetch }) => {
+          {({ loading, error, data, subscribeToMore }) => {
             console.log(data, "DATA");
             if (loading) return <h3>Loading . . .</h3>;
             if (error) return <h3>Error:`${error}` . . .</h3>;
+            this._subscribeToNewPosts(subscribeToMore)
             const posts = data.feed;
             return (
               <div>
@@ -46,7 +74,7 @@ class Posts extends Component {
                     <Post
                       key={post.id}
                       post={post}
-                      refresh={() => refetch()}
+                      
                       isDraft={!post.published}
                     />
                   ))}
