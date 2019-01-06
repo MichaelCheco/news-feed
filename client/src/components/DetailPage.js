@@ -2,6 +2,17 @@ import React, { Component, Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from 'graphql-tag'
 import { withRouter } from 'react-router'
+import styled from "styled-components";
+const Container = styled.div`
+  display: grid;
+  overflow: scroll;
+  grid-column: 2 / 7;
+  grid-row: 3 / -1;
+  margin-top: 30px;
+  background: white;
+  border: 1px solid grey;
+  border-radius: 3px;
+`;
 const POST_QUERY = gql`
   query PostQuery($id: ID!) {
     post(id: $id) {
@@ -17,14 +28,12 @@ class DetailPage extends Component {
         return ( 
                 <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
                     {({ data, loading, error}) => {
-                        if (loading) return <h3>Loading . . .</h3>
                         if (error) return <h3>Error . . .</h3>
-                        console.log(data, 'DATAAAA', this.props.match.params.id)
                         return (
-                            <Fragment>
-                                <h2>{data.post.title}</h2>
-                                <p>{data.post.content}</p>
-                            </Fragment>
+                            <Container>
+                               {loading ? <h3>Loading . . .</h3> : <div><h2>{data.post.title}</h2>
+                                <p>{data.post.content}</p></div>}
+                            </Container>
                         )
                     }}
                 </Query>
