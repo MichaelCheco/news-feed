@@ -34,7 +34,7 @@ class Header extends Component {
           <Nav>
         <Link to="/"><i class="fas fa-newspaper"></i> Feed</Link>
         <Link to="/search"><i class="fas fa-search"></i> Search </Link>
-        <Link to="/store"><i class="fas fa-store"></i> Store</Link>
+        <a href="https://www.lambdaschoolshop.com/"><i class="fas fa-store"></i> Store</a>
         {authToken && <Link to="/create"><i class="far fa-plus-square"></i> Create</Link>}
         </Nav>
         
