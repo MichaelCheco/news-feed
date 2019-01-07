@@ -62,7 +62,7 @@ class Posts extends Component {
     return (
       <Container>
         <Query query={POSTS_QUERY}>
-          {({ loading, error, data, subscribeToMore }) => {
+          {({ loading, error, data, subscribeToMore, refetch }) => {
             if (loading) return <CubeGrid size={90} color={props => props.theme.red} />;
             if (error) return <h3>Error:`${error}` . . .</h3>;
             this._subscribeToNewPosts(subscribeToMore)
@@ -74,7 +74,7 @@ class Posts extends Component {
                     <Post
                       key={post.id}
                       post={post}
-                      
+                      refresh={() => refetch()}
                       isDraft={!post.published}
                     />
                   ))}

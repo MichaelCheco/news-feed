@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { withRouter } from 'react-router'
 import { timeDifferenceForDate } from '../utils'
 const Container = styled.div`
   display: grid;
@@ -13,6 +14,8 @@ const Container = styled.div`
 const H2 = styled.h2`
   color: black;
   height: 20px;
+  /* font-family: 'Anaheim', sans-serif; */
+  font-family: 'Thasadith', sans-serif;
 `;
 const Author = styled.p`
     font-style: italic;
@@ -53,7 +56,7 @@ const ButtonDiv = styled.div`
     align-items: center;
     display: flex;
 `;
-export default class Post extends Component {
+ class Post extends Component {
   render() {
       const { title, content, createdAt } = this.props.post
     console.log(this.props, "cccccc");
@@ -75,3 +78,4 @@ export default class Post extends Component {
     );
   }
 }
+export default withRouter(Post)
