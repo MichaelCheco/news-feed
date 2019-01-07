@@ -67,7 +67,7 @@ const LinkStyles = styled.div`
   text-decoration: underline;
   font-family: 'Thasadith', sans-serif;
   a {
-    color: ${props => props.theme.red};
+    color: black;
   }
 `;
 const Auth = styled.div`
