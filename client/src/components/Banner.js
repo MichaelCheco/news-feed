@@ -65,9 +65,9 @@ const LinkStyles = styled.div`
   width: 70px;
   height: 40px;
   text-decoration: underline;
-
+  font-family: 'Thasadith', sans-serif;
   a {
-    color: black;
+    color: ${props => props.theme.red};
   }
 `;
 const Auth = styled.div`
