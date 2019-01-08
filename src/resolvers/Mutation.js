@@ -45,6 +45,18 @@ const Mutation = {
   },
   deletePost: async (parent, { id }, ctx) => {
       return ctx.prisma.deletePost({ id })
+  },
+  writeComment: (parent, { text, postId }, ctx) => {
+      const userId = getUserId(ctx)
+      return ctx.prisma.createComment({
+          text,
+          post: {
+              connect: { id: postId }
+          },
+          writtenBy: {
+              connect: { id: userId }
+          }
+      })
   }
 };
 
