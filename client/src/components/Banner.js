@@ -51,26 +51,30 @@ const LogoWrapper = styled.div`
 `;
 const Button = styled.div`
   font-size: 17px;
-  width: 70px;
   color: black;
-  height: 40px;
   padding: 5px;
   cursor: pointer;
-
-  text-decoration: underline;
 `;
 const LinkStyles = styled.div`
-  font-size: 17px;
-  margin-top: 9px;
-  width: 70px;
-  height: 40px;
-  text-decoration: underline;
-  font-family: 'Thasadith', sans-serif;
+  width: 26%;
+  display: flex;
+margin-right: 35px;
+  justify-content: space-between;
+  font-family: "Thasadith", sans-serif;
   a {
     color: black;
+    margin-top: 4px;
   }
 `;
+const I = styled.i`
+border-bottom: 1px solid black;
+font-size: 20px;
+font-style: normal;
+font-weight:bold;
+  /* color: red; */
+`;
 const Auth = styled.div`
+justify-content: flex-end;
   width: 30%;
   display: flex;
   align-items: center;
@@ -87,18 +91,22 @@ class Banner extends Component {
         </LogoWrapper>
         <Auth>
           <LinkStyles>
-            <Link to="/login">
-              <i class="fas fa-sign-in-alt"> Login</i>{" "}
-            </Link>
-          </LinkStyles>{" "}
-          <Button
-            onClick={() => {
-              localStorage.removeItem(AUTH_TOKEN);
-              this.props.history.push("/login");
-            }}
-          >
-            <i class="fas fa-sign-out-alt">Logout</i>
-          </Button>
+            <Button
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              <I class="fas fa-sign-in-alt"> Login</I>
+            </Button>
+            <Button
+              onClick={() => {
+                localStorage.removeItem(AUTH_TOKEN);
+                this.props.history.push("/login");
+              }}
+            >
+              <I class="fas fa-sign-out-alt">Logout</I>
+            </Button>
+          </LinkStyles>
         </Auth>
       </Top>
     );

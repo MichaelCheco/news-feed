@@ -29,6 +29,7 @@ const P = styled.p`
   font-size: 14px;
 `;
 const Content = styled.div`
+margin-left: 10px;
   width: 70%;
   height: 200px;
   overflow: hidden;

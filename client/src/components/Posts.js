@@ -9,9 +9,9 @@ const Container = styled.div`
   overflow: scroll;
   grid-column: 2 / 7;
   grid-row: 3 / -1;
-  margin-top: 30px;
+  margin-top: 55px;
   background: white;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 3px;
 `;
 const POSTS_QUERY = gql`

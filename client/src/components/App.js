@@ -6,6 +6,7 @@ import Header from "./Header";
 import Search from "./Search";
 import Create from "./Create";
 import Banner from './Banner'
+import girl from '../img/lambdagirl.png'
 import { Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 const Container = styled.div`
@@ -15,7 +16,7 @@ const Container = styled.div`
   height: 100vh;
   grid-gap: 0;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 100px 50px 2fr 1fr;
+  grid-template-rows: 100px 50px 1fr 1fr;
 `;
 
 
@@ -53,6 +54,16 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
+const Girl = styled.img`
+  grid-column: 7 / 10;
+  margin-left: 45px;
+  border-radius: 5px;
+  margin-top: 58px;
+  grid-row: 3;
+  align-self: end;
+`;
+
+
 class App extends Component {
   render() {
     return (
@@ -62,6 +73,7 @@ class App extends Component {
           <Container>
           <Banner />
             <Header />
+            <Girl src={girl} alt="Girl in Lambda Sweater" />
             <Switch>
               <Route path="/login" component={Login} />
               <Route exact path="/" component={Posts} />
