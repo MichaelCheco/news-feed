@@ -27,6 +27,9 @@ const Button = styled.button`
   color: grey;
   font-size:  15px;
   background: inherit;
+  :focus {
+    outline: 0;
+  }
   :hover {
     color: ${props => props.theme.darkBlue};
     text-decoration: underline;
