@@ -7,7 +7,7 @@ import Search from "./Search";
 import Create from "./Create";
 import Banner from './Banner'
 import girl from '../img/lambdagirl.png'
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 const Container = styled.div`
   margin: 0px;
@@ -75,11 +75,13 @@ class App extends Component {
             <Header />
             <Girl src={girl} alt="Girl in Lambda Sweater" />
             <Switch>
+            <Route exact path='/' render={() => <Redirect to='/new/1' />} />
               <Route path="/login" component={Login} />
-              <Route exact path="/" component={Posts} />
+              <Route exact path="/top" component={Posts} />
               <Route path="/search" component={Search} />
               <Route path="/post/:id" component={DetailPage} />
               <Route path="/create" component={Create} />
+              <Route exact path='/new/:page' component={Posts} />
             </Switch>
           </Container>
         </ThemeProvider>

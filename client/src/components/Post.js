@@ -6,6 +6,8 @@ import { timeDifferenceForDate } from '../utils'
 const Container = styled.div`
   display: grid;
   background: white;
+  grid-row: 3 / -1;
+
   margin: 20px;
   padding: 10px;
   display: flex;

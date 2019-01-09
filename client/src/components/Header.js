@@ -32,7 +32,7 @@ class Header extends Component {
     return (
       <MyHeader>
           <Nav>
-        <Link to="/"><i class="fas fa-newspaper"></i> Feed</Link>
+        <Link to="/top"><i class="fas fa-newspaper"></i> Feed</Link>
         <Link to="/search"><i class="fas fa-search"></i> Search </Link>
         <a href="https://www.lambdaschoolshop.com/"><i class="fas fa-store"></i> Store</a>
         {authToken && <Link to="/create"><i class="far fa-plus-square"></i> Create</Link>}

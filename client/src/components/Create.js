@@ -1,8 +1,10 @@
 import React, { PureComponent } from "react";
 import { withApollo, Mutation } from "react-apollo";
 import { withRouter } from 'react-router'
+import { POSTS_QUERY } from './Posts'
 import gql from "graphql-tag";
 import styled from "styled-components";
+import { POSTS_PER_PAGE } from "../constants";
 const Container = styled.div`
   display: grid;
   grid-column: 2 / 7;
@@ -78,8 +80,26 @@ class Create extends PureComponent {
     this.setState({ [name]: value });
   };
   render() {
+    const { title, content } = this.state;
     return (
-      <Mutation mutation={CREATE_POST_MUTATION}>
+      <Mutation mutation={CREATE_POST_MUTATION}
+      variables={{ title, content }}
+      onCompleted={() => this.props.history.push('/new/1')}
+      update={(store, { data: { post } }) => {
+        const first = POSTS_PER_PAGE
+        const skip = 0
+        const data = store.readQuery({
+          query: POSTS_QUERY,
+        variables: { first, skip}
+        })
+        data.feed.unshift(post)
+        store.writeQuery({
+          query: POSTS_QUERY,
+          data,
+          variables: { first, skip }
+        })
+      }}
+      >
         {(createPost, { data, loading, error }) => {
           return (
             <Container>
