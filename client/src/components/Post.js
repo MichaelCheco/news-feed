@@ -62,7 +62,6 @@ const ButtonDiv = styled.div`
  class Post extends Component {
   render() {
       const { title, content, createdAt } = this.props.post
-    console.log(this.props, "cccccc");
     return (
       <Container>
           <Content>

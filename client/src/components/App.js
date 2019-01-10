@@ -77,7 +77,7 @@ class App extends Component {
             <Switch>
             <Route exact path='/' render={() => <Redirect to='/new/1' />} />
               <Route path="/login" component={Login} />
-              <Route exact path="/top" component={Posts} />
+              <Route exact path="/new/1" component={Posts} />
               <Route path="/search" component={Search} />
               <Route path="/post/:id" component={DetailPage} />
               <Route path="/create" component={Create} />

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { AUTH_TOKEN } from "../constants";
-import { Link } from "react-router-dom";
 const Top = styled.div`
   grid-row: 1;
   grid-column: 1 / span 10;
@@ -71,7 +70,6 @@ border-bottom: 1px solid black;
 font-size: 20px;
 font-style: normal;
 font-weight:bold;
-  /* color: red; */
 `;
 const Auth = styled.div`
 justify-content: flex-end;
