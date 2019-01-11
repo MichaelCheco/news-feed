@@ -19,7 +19,10 @@ const Pagination = styled.div`
   display: flex;
   height: 20px;
   justify-content: flex-end;
-`;
+  padding: 15px 3px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  `;
 const Button = styled.button`
   margin-right: 18px;
   height: 30px;
