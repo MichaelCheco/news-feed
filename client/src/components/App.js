@@ -7,7 +7,7 @@ import Search from "./Search";
 import Create from "./Create";
 import Banner from './Banner'
 import girl from '../img/lambdagirl.png'
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 const Container = styled.div`
   margin: 0px;
@@ -18,7 +18,22 @@ const Container = styled.div`
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: 100px 50px 1fr 1fr;
 `;
-
+const LinkWrapper = styled.div`
+display: flex;
+justify-content: space-between;
+  grid-column: 7 / 10;
+  width: 485px;
+  font-family: 'Thasadith', sans-serif;
+  text-align: center;
+  margin-left: 45px;
+  color: black;
+  font-size: 18px;
+  grid-row: 4;
+a {
+  color: black;
+  margin: 5px 5px;
+}
+`;
 
 const theme = {
   darkBlue: "#004466",
@@ -74,10 +89,17 @@ class App extends Component {
           <Banner />
             <Header />
             <Girl src={girl} alt="Girl in Lambda Sweater" />
+            <LinkWrapper>
+            <Link to="#">Tracks</Link>
+            <Link to="#">About</Link>
+            <Link to="#">Apply Now</Link>
+            <Link to="#">Contact Us</Link>
+            <Link to="#">Referral</Link>
+            </LinkWrapper>
             <Switch>
             <Route exact path='/' render={() => <Redirect to='/new/1' />} />
               <Route path="/login" component={Login} />
-              <Route exact path="/new/1" component={Posts} />
+              <Route exact path="/new/:page" component={Posts} />
               <Route path="/search" component={Search} />
               <Route path="/post/:id" component={DetailPage} />
               <Route path="/create" component={Create} />
