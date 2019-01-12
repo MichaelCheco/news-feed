@@ -22,7 +22,7 @@ const LinkWrapper = styled.div`
 display: flex;
 justify-content: space-between;
   grid-column: 7 / 10;
-  width: 485px;
+  width: 100%;
   font-family: 'Thasadith', sans-serif;
   text-align: center;
   margin-left: 45px;
