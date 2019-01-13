@@ -9,6 +9,7 @@ import Banner from './Banner'
 import girl from '../img/lambdagirl.png'
 import { Route, Switch, Redirect, Link } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import Tracks from "./Tracks";
 const Container = styled.div`
   margin: 0px;
   display: grid;
@@ -90,7 +91,7 @@ class App extends Component {
             <Header />
             <Girl src={girl} alt="Girl in Lambda Sweater" />
             <LinkWrapper>
-            <Link to="#">Tracks</Link>
+            <Link to="/tracks">Tracks</Link>
             <Link to="#">About</Link>
             <Link to="#">Apply Now</Link>
             <Link to="#">Contact Us</Link>
@@ -99,6 +100,7 @@ class App extends Component {
             <Switch>
             <Route exact path='/' render={() => <Redirect to='/new/1' />} />
               <Route path="/login" component={Login} />
+              <Route path="/tracks" component={Tracks} />
               <Route exact path="/new/:page" component={Posts} />
               <Route path="/search" component={Search} />
               <Route path="/post/:id" component={DetailPage} />
