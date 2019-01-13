@@ -46,6 +46,9 @@ const Mutation = {
   deletePost: async (parent, { id }, ctx) => {
       return ctx.prisma.deletePost({ id })
   },
+  createTrack: async ( parent, { name }, ctx) => {
+      return ctx.prisma.createTrack({ name })
+  }
 //   writeComment: async (parent, { text, postId }, ctx) => {
 //       const userId =await  getUserId(ctx)
 //       return ctx.prisma.createComment({
