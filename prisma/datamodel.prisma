@@ -23,3 +23,6 @@ type Comment {
   writtenBy: User!
   post: Post!
 }
+type Track {
+  name: String!
+}
