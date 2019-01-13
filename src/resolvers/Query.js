@@ -30,6 +30,9 @@ const Query = {
         ]
       }
     });
+  },
+  tracks: (parent, args, ctx)  => {
+      return ctx.prisma.tracks()
   }
 };
 
