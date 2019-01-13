@@ -17,6 +17,7 @@ type Mutation {
   createPost(title: String!, content: String!): Post!
   updatePost(title: String, content: String, id: ID!): Post!
   deletePost(id: ID!): Post
+  createTrack(name: String!): Track!
   # writeComment(text: String!, postId: ID!): Comment
 }
 
