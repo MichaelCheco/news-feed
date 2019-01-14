@@ -5,7 +5,6 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 const Container = styled.div`
   display: grid;
-  overflow: scroll;
   grid-column: 2 / 7;
   grid-row: 3 / -1;
   margin-top: 30px;
