@@ -11,6 +11,7 @@ import { Route, Switch, Redirect, Link } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import Tracks from "./Tracks";
 import Contact from "./Contact";
+import About from "./About";
 const Container = styled.div`
   margin: 0px;
   display: grid;
@@ -93,7 +94,7 @@ class App extends Component {
             <Girl src={girl} alt="Girl in Lambda Sweater" />
             <LinkWrapper>
             <Link to="/tracks">Tracks</Link>
-            <Link to="#">About</Link>
+            <Link to="/about">About</Link>
             <Link to="#">Apply Now</Link>
             <Link to="/contact">Contact Us</Link>
             <Link to="#">Referral</Link>
@@ -103,6 +104,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/tracks" component={Tracks} />
               <Route path="/contact" component={Contact} />
+              <Route path="/about" component={About} />
               <Route exact path="/new/:page" component={Posts} />
               <Route path="/search" component={Search} />
               <Route path="/post/:id" component={DetailPage} />
