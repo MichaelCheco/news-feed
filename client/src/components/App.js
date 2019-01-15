@@ -94,8 +94,8 @@ class App extends Component {
             <Girl src={girl} alt="Girl in Lambda Sweater" />
             <LinkWrapper>
             <Link to="/tracks">Tracks</Link>
-            <Link to="/about">About</Link>
-            <Link to="#">Apply Now</Link>
+            <Link to="/about"> About</Link>
+            <a href="https://lambdaschool.com/apply/">Apply Now</a>
             <Link to="/contact">Contact Us</Link>
             <Link to="#">Referral</Link>
             </LinkWrapper>
