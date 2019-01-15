@@ -18,7 +18,7 @@ const EmailInput = styled.input`
   height: 60px;
   border: 3px solid ${props => props.theme.darkBlue};
   border-radius: 4px;
-  font-size: 36px;
+  font-size: 26px;
   margin-bottom: 10px;
   :focus {
     outline: 0;
@@ -29,7 +29,7 @@ const PasswordInput = styled.input`
   height: 60px;
   border-radius: 4px;
   border: 3px solid ${props => props.theme.darkBlue};
-  font-size: 36px;
+  font-size: 26px;
   margin-bottom: 10px;
   :focus {
     outline: 0;
@@ -40,7 +40,7 @@ const NameInput = styled.input`
   height: 60px;
   border-radius: 4px;
   border: 3px solid ${props => props.theme.darkBlue};
-  font-size: 36px;
+  font-size: 26px;
   margin-bottom: 10px;
   :focus {
     outline: 0;
