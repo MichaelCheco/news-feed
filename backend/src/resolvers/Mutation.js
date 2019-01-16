@@ -48,7 +48,17 @@ const Mutation = {
   },
   createTrack: async ( parent, { name }, ctx) => {
       return ctx.prisma.createTrack({ name })
-  }
+  },
+//   updateUser: async ( parent, { id, email }, ctx) => {
+//       return ctx.prisma.updateUser({
+//           where: { id },
+//           data: {
+//               friends: {
+//                   connect: [{ email}]
+//               }
+//           }
+//       })
+//   }
 //   writeComment: async (parent, { text, postId }, ctx) => {
 //       const userId =await  getUserId(ctx)
 //       return ctx.prisma.createComment({

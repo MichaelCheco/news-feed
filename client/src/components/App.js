@@ -97,7 +97,7 @@ class App extends Component {
             <Link to="/about"> About</Link>
             <a href="https://lambdaschool.com/apply/">Apply Now</a>
             <Link to="/contact">Contact Us</Link>
-            <Link to="#">Referral</Link>
+            <a href="https://lambdaschool.com/outcomes/">Outcomes</a>
             </LinkWrapper>
             <Switch>
             <Route exact path='/' render={() => <Redirect to='/new/1' />} />

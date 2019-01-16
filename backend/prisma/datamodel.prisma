@@ -5,6 +5,7 @@ type User {
   password: String!
   posts: [Post!]!
   comments: [Comment!]!
+  friends: [User]!
 }
 
 type Post {

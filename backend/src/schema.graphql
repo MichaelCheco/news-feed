@@ -30,6 +30,7 @@ type User {
   name: String!
   email: String!
   posts: [Post!]!
+  # friends: [User]
   # comments: [Comment!]!
 }
 type Post {
