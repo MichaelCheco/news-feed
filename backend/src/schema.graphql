@@ -15,7 +15,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createPost(title: String!, content: String!): Post!
-  updatePost(title: String, content: String, id: ID!): Post!
+  updatePost(title: String, content: String, id: ID!): Post
   deletePost(id: ID!): Post
   createTrack(name: String!): Track!
   # writeComment(text: String!, postId: ID!): Comment

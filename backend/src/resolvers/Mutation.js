@@ -37,10 +37,14 @@ const Mutation = {
           author: { connect: { id: userId }}
       })
   },
-  updatePost: async (parent, { title, content , id}, ctx) => {
+  updatePost: async (parent, args, ctx) => {
+      const updates = { ...args }
+      delete updates.id
       return ctx.prisma.updatePost({
-          where: { id },
-          data: { title, content }
+            data: updates,
+            where: { id: args.id }
+        //   where: { id },
+        //   data: { title, content }
       })
   },
   deletePost: async (parent, { id }, ctx) => {
