@@ -1,49 +1,24 @@
-import React, { Component, Fragment } from "react";
-import Login from "./Login";
-import Posts from "./Posts";
-import DetailPage from "./DetailPage";
-import Header from "./Header";
-import Search from "./Search";
-import Create from "./Create";
-import Banner from './Banner'
-import girl from '../img/lambdagirl.png'
-import { Route, Switch, Redirect, Link } from "react-router-dom";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import Tracks from "./Tracks";
-import Contact from "./Contact";
-import About from "./About";
-const Container = styled.div`
-  margin: 0px;
-  display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-gap: 0;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 100px 50px 1fr 1fr;
-`;
-const LinkWrapper = styled.div`
-display: flex;
-justify-content: space-between;
-  grid-column: 7 / 10;
-  width: 100%;
-  font-family: 'Thasadith', sans-serif;
-  text-align: center;
-  margin-left: 45px;
-  color: black;
-  font-size: 18px;
-  grid-row: 4;
-a {
-  color: black;
-  margin: 5px 5px;
-}
-`;
+import React, { Component, Fragment } from 'react';
+import Login from './Login';
+import Posts from './Posts';
+import DetailPage from './DetailPage';
+import Header from './Header';
+import Search from './Search';
+import Create from './Create';
+import Banner from './Banner';
+import girl from '../img/lambdagirl.png';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Tracks from './Tracks';
+import Contact from './Contact';
+import About from './About';
 
 const theme = {
-  darkBlue: "#004466",
-  mediumBlue: "#036699",
-  lightBlue: "#99CBCC",
-  lightGrey: "#E4E5E6",
-  red: "#FF2104"
+	darkBlue: '#004466',
+	mediumBlue: '#036699',
+	lightBlue: '#99CBCC',
+	lightGrey: '#E4E5E6',
+	red: '#FF2104',
 };
 const GlobalStyle = createGlobalStyle`
   html {
@@ -73,49 +48,48 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Girl = styled.img`
-  grid-column: 7 / 10;
-  margin-left: 45px;
-  border-radius: 5px;
-  margin-top: 58px;
-  grid-row: 3;
-  align-self: end;
+	grid-column: 7 / 10;
+	margin-left: 45px;
+	border-radius: 5px;
+	margin-top: 58px;
+	grid-row: 3;
+	align-self: end;
 `;
 
-
 class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <Container>
-          <Banner />
-            <Header />
-            <Girl src={girl} alt="Girl in Lambda Sweater" />
-            <LinkWrapper>
-            <Link to="/tracks">Tracks</Link>
-            <Link to="/about"> About</Link>
-            <a href="https://lambdaschool.com/apply/">Apply Now</a>
-            <Link to="/contact">Contact Us</Link>
-            <a href="https://lambdaschool.com/outcomes/">Outcomes</a>
-            </LinkWrapper>
-            <Switch>
-            <Route exact path='/' render={() => <Redirect to='/new/1' />} />
-              <Route path="/login" component={Login} />
-              <Route path="/tracks" component={Tracks} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/about" component={About} />
-              <Route exact path="/new/:page" component={Posts} />
-              <Route path="/search" component={Search} />
-              <Route path="/post/:id" component={DetailPage} />
-              <Route path="/create" component={Create} />
-              <Route exact path='/new/:page' component={Posts} />
-            </Switch>
-          </Container>
-        </ThemeProvider>
-      </Fragment>
-    );
-  }
+	render() {
+		return (
+			<Fragment>
+				<GlobalStyle />
+				<ThemeProvider theme={theme}>
+					<div>
+						<Banner />
+						<Header />
+						<Girl src={girl} alt="Girl in Lambda Sweater" />
+						<div>
+							<Link to="/tracks">Tracks</Link>
+							<Link to="/about"> About</Link>
+							<a href="https://lambdaschool.com/apply/">Apply Now</a>
+							<Link to="/contact">Contact Us</Link>
+							<a href="https://lambdaschool.com/outcomes/">Outcomes</a>
+						</div>
+						<Switch>
+							<Route exact path="/" render={() => <Redirect to="/new/1" />} />
+							<Route path="/login" component={Login} />
+							<Route path="/tracks" component={Tracks} />
+							<Route path="/contact" component={Contact} />
+							<Route path="/about" component={About} />
+							<Route exact path="/new/:page" component={Posts} />
+							<Route path="/search" component={Search} />
+							<Route path="/post/:id" component={DetailPage} />
+							<Route path="/create" component={Create} />
+							<Route exact path="/new/:page" component={Posts} />
+						</Switch>
+					</div>
+				</ThemeProvider>
+			</Fragment>
+		);
+	}
 }
 
 export default App;
