@@ -12,11 +12,19 @@ const Div = styled.div`
 	width: 100%;
 	@media (min-width: 375px) {
 		i {
-			color: red;
+			color: white;
 		}
 		a {
-			color: red;
+			color: white;
 		}
+	}
+`;
+const Pages = styled.div`
+	@media (min-width: 375px) {
+		display: flex;
+		background: ${props => props.theme.mediumBlue};
+		justify-content: space-around;
+		margin: 1rem 0;
 	}
 `;
 class Header extends Component {
@@ -24,7 +32,7 @@ class Header extends Component {
 		const authToken = localStorage.getItem(AUTH_TOKEN);
 		return (
 			<Div>
-				<div>
+				<Pages>
 					<Link to="/new/1">
 						<i class="fas fa-newspaper" /> Feed
 					</Link>
@@ -39,7 +47,7 @@ class Header extends Component {
 							<i class="far fa-plus-square" /> Create
 						</Link>
 					)}
-				</div>
+				</Pages>
 			</Div>
 		);
 	}
