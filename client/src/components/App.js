@@ -47,14 +47,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-const Girl = styled.img`
-	grid-column: 7 / 10;
-	margin-left: 45px;
-	border-radius: 5px;
-	margin-top: 58px;
-	grid-row: 3;
-	align-self: end;
-`;
+const Girl = styled.img``;
 
 class App extends Component {
 	render() {

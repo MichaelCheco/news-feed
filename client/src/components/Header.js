@@ -9,8 +9,8 @@ import styled from 'styled-components';
 	lightGrey: '#E4E5E6',
 	red */
 const Div = styled.div`
+	width: 100%;
 	@media (min-width: 375px) {
-		border: 3px solid red;
 		i {
 			color: red;
 		}

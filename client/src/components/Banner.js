@@ -8,45 +8,60 @@ import { AUTH_TOKEN } from '../constants';
 	lightGrey: '#E4E5E6',
 	red */
 const Div = styled.div`
+	width: 100%;
+
 	@media (min-width: 375px) {
-		border: 3px solid blue;
+		display: flex;
 	}
 `;
 const LogoWrapper = styled.div`
-	border: 3px solid green;
-	display: flex;
-	justify-content: center;
 	padding: 10px;
+	width: 70%;
+
+	display: flex;
 `;
 const LogoStylesL = styled.div`
 	width: 14%;
-	margin: 5px 0;
+	padding: 4px;
+
 	text-align: center;
 	font-size: 2.3rem;
 	font-weight: bold;
 	background: ${props => props.theme.mediumBlue};
 	color: white;
-	padding: 5px;
 `;
 const LogoStylesS = styled.div`
 	width: 14%;
-	margin: 5px 0;
+	padding: 4px;
+
 	text-align: center;
 	font-size: 2.3rem;
 	font-weight: bold;
 	background: ${props => props.theme.lightBlue};
 	color: white;
-	padding: 5px;
 `;
 const LogoStylesN = styled.div`
 	width: 14%;
-	margin: 5px 0;
+	padding: 4px;
+
 	text-align: center;
 	font-size: 2.3rem;
 	font-weight: bold;
 	background: ${props => props.theme.red};
 	color: white;
-	padding: 5px;
+`;
+const P = styled.p`
+	font-size: 1.5rem;
+`;
+const AuthWrapper = styled.div`
+	@media (min-width: 375px) {
+		display: flex;
+		p {
+			margin: 0.5rem;
+			color: grey;
+			text-decoration: underline;
+		}
+	}
 `;
 class Banner extends Component {
 	state = {};
@@ -60,19 +75,21 @@ class Banner extends Component {
 				</LogoWrapper>
 				<div>
 					<div>
-						<button
-							onClick={() => {
-								this.props.history.push('/login');
-							}}>
-							<i class="fas fa-sign-in-alt"> Login</i>
-						</button>
-						<button
-							onClick={() => {
-								localStorage.removeItem(AUTH_TOKEN);
-								this.props.history.push('/login');
-							}}>
-							<i class="fas fa-sign-out-alt">Logout</i>
-						</button>
+						<AuthWrapper>
+							<P
+								onClick={() => {
+									this.props.history.push('/login');
+								}}>
+								Login
+							</P>
+							<P
+								onClick={() => {
+									localStorage.removeItem(AUTH_TOKEN);
+									this.props.history.push('/login');
+								}}>
+								Logout
+							</P>
+						</AuthWrapper>
 					</div>
 				</div>
 			</Div>
