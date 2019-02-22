@@ -5,7 +5,20 @@ import Post from './Post';
 import { POSTS_PER_PAGE } from '../constants';
 import { CubeGrid } from 'styled-spinkit';
 import styled from 'styled-components';
-
+const PaginationStyles = styled.div`
+	@media (min-width: 375px) {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 5rem;
+	}
+	button {
+		text-align: center;
+		border-radius: 4px;
+		height: 25px;
+		width: 75px;
+		margin: 0.4rem;
+	}
+`;
 export const POSTS_QUERY = gql`
 	query PostsQuery($first: Int, $skip: Int) {
 		feed(first: $first, skip: $skip) {
@@ -100,10 +113,10 @@ class Posts extends Component {
 						return (
 							<div>
 								{isNewPage && (
-									<div>
-										<button onClick={this._previousPage}>Previous</button>
-										<button onClick={() => this._nextPage(data)}>Next</button>
-									</div>
+									<PaginationStyles>
+										<button onClick={this._previousPage}>← Previous</button>
+										<button onClick={() => this._nextPage(data)}>Next →</button>
+									</PaginationStyles>
 								)}
 								{posts &&
 									posts.map(post => (
