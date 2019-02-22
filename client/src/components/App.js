@@ -46,7 +46,15 @@ const GlobalStyle = createGlobalStyle`
 
     }
 `;
-
+const Links = styled.div`
+	@media (min-width: 375px) {
+		display: flex;
+		justify-content: space-around;
+		a {
+			color: gray;
+		}
+	}
+`;
 const Girl = styled.img``;
 
 class App extends Component {
@@ -59,13 +67,13 @@ class App extends Component {
 						<Banner />
 						<Header />
 						<Girl src={girl} alt="Girl in Lambda Sweater" />
-						<div>
+						<Links>
 							<Link to="/tracks">Tracks</Link>
 							<Link to="/about"> About</Link>
 							<a href="https://lambdaschool.com/apply/">Apply Now</a>
 							<Link to="/contact">Contact Us</Link>
 							<a href="https://lambdaschool.com/outcomes/">Outcomes</a>
-						</div>
+						</Links>
 						<Switch>
 							<Route exact path="/" render={() => <Redirect to="/new/1" />} />
 							<Route path="/login" component={Login} />
