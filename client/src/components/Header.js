@@ -3,12 +3,27 @@ import { Link } from 'react-router-dom';
 import { AUTH_TOKEN } from '../constants';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
-
+/* darkBlue: '#004466',
+	mediumBlue: '#036699',
+	lightBlue: '#99CBCC',
+	lightGrey: '#E4E5E6',
+	red */
+const Div = styled.div`
+	@media (min-width: 375px) {
+		border: 3px solid red;
+		i {
+			color: red;
+		}
+		a {
+			color: red;
+		}
+	}
+`;
 class Header extends Component {
 	render() {
 		const authToken = localStorage.getItem(AUTH_TOKEN);
 		return (
-			<div>
+			<Div>
 				<div>
 					<Link to="/new/1">
 						<i class="fas fa-newspaper" /> Feed
@@ -25,7 +40,7 @@ class Header extends Component {
 						</Link>
 					)}
 				</div>
-			</div>
+			</Div>
 		);
 	}
 }
