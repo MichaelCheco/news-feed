@@ -19,6 +19,14 @@ const PaginationStyles = styled.div`
 		margin: 0.4rem;
 	}
 `;
+const PostContainer = styled.div`
+	width: 100%;
+	@media (min-width: 375px) {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+	}
+`;
 export const POSTS_QUERY = gql`
 	query PostsQuery($first: Int, $skip: Int) {
 		feed(first: $first, skip: $skip) {
@@ -111,7 +119,7 @@ class Posts extends Component {
 							? (this.props.match.params.page - 1) * POSTS_PER_PAGE
 							: 0;
 						return (
-							<div>
+							<PostContainer>
 								{isNewPage && (
 									<PaginationStyles>
 										<button onClick={this._previousPage}>← Previous</button>
@@ -128,7 +136,7 @@ class Posts extends Component {
 										/>
 									))}
 								{this.props.children}
-							</div>
+							</PostContainer>
 						);
 					}}
 				</Query>
