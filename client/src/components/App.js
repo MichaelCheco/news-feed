@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-size: 1.5rem;
         line-height: 2;
-        font-family: 'Raleway', sans-serif;    
+        font-family: 'Thasadith', sans-serif;    
       }
       img {
         width: 100%;
