@@ -7,6 +7,7 @@ type Query {
 	filterPosts(searchString: String): [Post!]!
 	post(id: ID!): Post
 	tracks: [Track!]!
+	track(id: ID!): Track
 }
 type Track {
 	id: ID

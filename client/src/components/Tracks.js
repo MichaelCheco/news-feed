@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { CubeGrid } from 'styled-spinkit';
@@ -67,10 +68,11 @@ class Tracks extends Component {
 						return tracks.map((track, index) => (
 							<Track>
 								<h2 key={index}>{track.name}</h2>
-								<p>{track.id}</p>
-								<Button>
-									<a>Learn More</a>
-								</Button>
+								<Link to={`/track/${track.id}`}>
+									<Button>
+										<a>Learn More</a>
+									</Button>
+								</Link>
 							</Track>
 						));
 					}}

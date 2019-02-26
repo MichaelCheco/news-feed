@@ -33,6 +33,9 @@ const Query = {
   },
   tracks: (parent, args, ctx)  => {
       return ctx.prisma.tracks()
+  },
+  track: (parent, { id }, ctx, info) => {
+    return ctx.prisma.track({ id })
   }
 };
 

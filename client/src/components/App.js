@@ -12,6 +12,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Tracks from './Tracks';
 import Contact from './Contact';
 import About from './About';
+import SingleTrack from './SingleTrack';
 
 const theme = {
 	darkBlue: '#004466',
@@ -83,6 +84,7 @@ class App extends Component {
 							<Route exact path="/new/:page" component={Posts} />
 							<Route path="/search" component={Search} />
 							<Route path="/post/:id" component={DetailPage} />
+							<Route path="/track/:id" component={SingleTrack} />
 							<Route path="/create" component={Create} />
 							<Route exact path="/new/:page" component={Posts} />
 						</Switch>
