@@ -149,6 +149,7 @@ input CommentUpdateManyWithoutPostInput {
   create: [CommentCreateWithoutPostInput!]
   delete: [CommentWhereUniqueInput!]
   connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
   disconnect: [CommentWhereUniqueInput!]
   update: [CommentUpdateWithWhereUniqueWithoutPostInput!]
   upsert: [CommentUpsertWithWhereUniqueWithoutPostInput!]
@@ -160,6 +161,7 @@ input CommentUpdateManyWithoutWrittenByInput {
   create: [CommentCreateWithoutWrittenByInput!]
   delete: [CommentWhereUniqueInput!]
   connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
   disconnect: [CommentWhereUniqueInput!]
   update: [CommentUpdateWithWhereUniqueWithoutWrittenByInput!]
   upsert: [CommentUpsertWithWhereUniqueWithoutWrittenByInput!]
@@ -262,7 +264,10 @@ type Mutation {
   deletePost(where: PostWhereUniqueInput!): Post
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   createTrack(data: TrackCreateInput!): Track!
+  updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
   updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
+  upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
+  deleteTrack(where: TrackWhereUniqueInput!): Track
   deleteManyTracks(where: TrackWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -475,6 +480,7 @@ input PostUpdateManyWithoutAuthorInput {
   create: [PostCreateWithoutAuthorInput!]
   delete: [PostWhereUniqueInput!]
   connect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
   disconnect: [PostWhereUniqueInput!]
   update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
   upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
@@ -605,6 +611,7 @@ type Query {
   post(where: PostWhereUniqueInput!): Post
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  track(where: TrackWhereUniqueInput!): Track
   tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
   tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
   user(where: UserWhereUniqueInput!): User
@@ -621,6 +628,7 @@ type Subscription {
 }
 
 type Track {
+  id: ID!
   name: String!
 }
 
@@ -640,10 +648,10 @@ type TrackEdge {
 }
 
 enum TrackOrderByInput {
-  name_ASC
-  name_DESC
   id_ASC
   id_DESC
+  name_ASC
+  name_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -651,6 +659,7 @@ enum TrackOrderByInput {
 }
 
 type TrackPreviousValues {
+  id: ID!
   name: String!
 }
 
@@ -672,11 +681,29 @@ input TrackSubscriptionWhereInput {
   NOT: [TrackSubscriptionWhereInput!]
 }
 
+input TrackUpdateInput {
+  name: String
+}
+
 input TrackUpdateManyMutationInput {
   name: String
 }
 
 input TrackWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   name: String
   name_not: String
   name_in: [String!]
@@ -694,6 +721,10 @@ input TrackWhereInput {
   AND: [TrackWhereInput!]
   OR: [TrackWhereInput!]
   NOT: [TrackWhereInput!]
+}
+
+input TrackWhereUniqueInput {
+  id: ID
 }
 
 type User {
@@ -889,6 +920,7 @@ input UserUpdateManyInput {
   upsert: [UserUpsertWithWhereUniqueNestedInput!]
   delete: [UserWhereUniqueInput!]
   connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   deleteMany: [UserScalarWhereInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]

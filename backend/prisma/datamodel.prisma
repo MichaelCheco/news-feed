@@ -1,29 +1,30 @@
 type User {
-  id: ID! @unique
-  name: String!
-  email: String! @unique
-  password: String!
-  posts: [Post!]!
-  comments: [Comment!]!
-  friends: [User]!
+	id: ID! @unique
+	name: String!
+	email: String! @unique
+	password: String!
+	posts: [Post!]!
+	comments: [Comment!]!
+	friends: [User]!
 }
 
 type Post {
-  id: ID! @unique
-  title: String!
-  content: String!
-  published: Boolean! @default(value: "false")
-  author: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  comments: [Comment!]!
+	id: ID! @unique
+	title: String!
+	content: String!
+	published: Boolean! @default(value: "false")
+	author: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	comments: [Comment!]!
 }
 type Comment {
-  id: ID! @unique
-  text: String!
-  writtenBy: User!
-  post: Post!
+	id: ID! @unique
+	text: String!
+	writtenBy: User!
+	post: Post!
 }
 type Track {
-  name: String!
+	id: ID! @unique
+	name: String!
 }

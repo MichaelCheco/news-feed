@@ -1,47 +1,48 @@
 scalar DateTime
 
 type Query {
-  me: User
-  users: [User!]!
-  feed(skip: Int, first: Int): [Post!]!
-  filterPosts(searchString: String): [Post!]!
-  post(id: ID!): Post
-  tracks: [Track!]!
+	me: User
+	users: [User!]!
+	feed(skip: Int, first: Int): [Post!]!
+	filterPosts(searchString: String): [Post!]!
+	post(id: ID!): Post
+	tracks: [Track!]!
 }
 type Track {
-  name: String!
+	id: ID
+	name: String!
 }
 type Mutation {
-  signup(email: String!, password: String!, name: String): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
-  createPost(title: String!, content: String!): Post!
-  updatePost(title: String, content: String, id: ID!): Post
-  deletePost(id: ID!): Post
-  createTrack(name: String!): Track!
-  # writeComment(text: String!, postId: ID!): Comment
+	signup(email: String!, password: String!, name: String): AuthPayload!
+	login(email: String!, password: String!): AuthPayload!
+	createPost(title: String!, content: String!): Post!
+	updatePost(title: String, content: String, id: ID!): Post
+	deletePost(id: ID!): Post
+	createTrack(name: String!): Track!
+	# writeComment(text: String!, postId: ID!): Comment
 }
 
 type Subscription {
-  post: Post
+	post: Post
 }
 
 type User {
-  id: ID!
-  name: String!
-  email: String!
-  posts: [Post!]!
-  # friends: [User]
-  # comments: [Comment!]!
+	id: ID!
+	name: String!
+	email: String!
+	posts: [Post!]!
+	# friends: [User]
+	# comments: [Comment!]!
 }
 type Post {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  published: Boolean!
-  title: String!
-  content: String
-  author: User!
-  # comments: [Comment!]!
+	id: ID!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	published: Boolean!
+	title: String!
+	content: String
+	author: User!
+	# comments: [Comment!]!
 }
 
 # type Comment {
@@ -51,6 +52,6 @@ type Post {
 #   post: Post!
 # }
 type AuthPayload {
-  token: String!
-  user: User!
+	token: String!
+	user: User!
 }

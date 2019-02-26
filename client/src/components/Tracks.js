@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const TRACKS_QUERY = gql`
 	query TRACKS_QUERY {
 		tracks {
+			id
 			name
 		}
 	}
@@ -66,6 +67,7 @@ class Tracks extends Component {
 						return tracks.map((track, index) => (
 							<Track>
 								<h2 key={index}>{track.name}</h2>
+								<p>{track.id}</p>
 								<Button>
 									<a>Learn More</a>
 								</Button>
