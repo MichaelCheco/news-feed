@@ -5,7 +5,69 @@ import { POSTS_QUERY } from './Posts';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { POSTS_PER_PAGE } from '../constants';
+const Wrapper = styled.div`
+	@media (min-width: 375px) {
+		/* border: 1px solid red;
+		display: flex;
+		flex-direction: column; */
+	}
+`;
+const InputWrapper = styled.div`
+	@media (min-width: 375px) {
+		display: flex;
+		flex-direction: column;
+		margin-top: 1rem;
+	}
+`;
+const Input = styled.input`
+	@media (min-width: 375px) {
+		width: 90%;
+		margin-left: 1.8rem;
+		height: 3rem;
+		font-size: 1.5rem;
+		:focus {
+			outline: 0;
+		}
+	}
+`;
+const Textarea = styled.textarea`
+	@media (min-width: 375px) {
+		border: 1px solid lightgrey;
+		margin-top: 20px;
+		width: 90%;
+		font-size: 1.5rem;
+		margin-left: 1.8rem;
+		resize: none;
+		:focus {
+			outline: 0;
+		}
+	}
+`;
+const Button = styled.button`
+	@media (min-width: 375px) {
+		border: 1px solid ${props => props.theme.mediumBlue};
+		width: 90%;
+		align-self: center;
+		height: 30px;
+		border-radius: 2px;
+		margin: 1rem 0;
+		background: ${props => props.theme.mediumBlue};
+		/* position: relative;
+		top: 70%;
+		right: 90%; */
 
+		&:hover {
+			cursor: pointer;
+			opacity: 0.7;
+		}
+		outline: 0;
+		a {
+			font-size: 1.3rem;
+			white-space: nowrap;
+			color: white;
+		}
+	}
+`;
 const CREATE_POST_MUTATION = gql`
 	mutation CreatePostMutation($title: String!, $content: String!) {
 		createPost(title: $title, content: $content) {
@@ -52,7 +114,7 @@ class Create extends PureComponent {
 				}}>
 				{(createPost, { data, loading, error }) => {
 					return (
-						<div>
+						<Wrapper>
 							<form
 								onSubmit={async e => {
 									e.preventDefault();
@@ -62,15 +124,15 @@ class Create extends PureComponent {
 									});
 									this.props.history.push('/');
 								}}>
-								<div>
-									<input
+								<InputWrapper>
+									<Input
 										autoFocus
 										name="title"
 										value={this.state.title}
 										placeholder="Title"
 										onChange={this.handleChange}
 									/>
-									<textarea
+									<Textarea
 										cols="10"
 										rows="20"
 										required
@@ -79,10 +141,12 @@ class Create extends PureComponent {
 										value={this.state.content}
 										onChange={this.handleChange}
 									/>
-									<button>Create</button>
-								</div>
+									<Button>
+										<a>Create</a>
+									</Button>
+								</InputWrapper>
 							</form>
-						</div>
+						</Wrapper>
 					);
 				}}
 			</Mutation>
