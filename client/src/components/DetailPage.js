@@ -4,7 +4,12 @@ import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { CubeGrid } from 'styled-spinkit';
-
+const Wrapper = styled.div`
+	width: 100%;
+	@media (min-width: 375px) {
+		padding: 1rem;
+	}
+`;
 const POST_QUERY = gql`
 	query PostQuery($id: ID!) {
 		post(id: $id) {
@@ -22,7 +27,7 @@ class DetailPage extends Component {
 				{({ data, loading, error }) => {
 					if (error) return <h3>Error . . .</h3>;
 					return (
-						<div>
+						<Wrapper>
 							{loading ? (
 								<CubeGrid size={90} color={props => props.theme.red} />
 							) : (
@@ -31,7 +36,7 @@ class DetailPage extends Component {
 									<p>{data.post.content}</p>
 								</div>
 							)}
-						</div>
+						</Wrapper>
 					);
 				}}
 			</Query>
