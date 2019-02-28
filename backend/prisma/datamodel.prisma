@@ -27,4 +27,6 @@ type Comment {
 type Track {
 	id: ID! @unique
 	name: String!
+	module: String!
+	info: String!
 }

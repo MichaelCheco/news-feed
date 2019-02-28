@@ -259,6 +259,10 @@ export type TrackOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "module_ASC"
+  | "module_DESC"
+  | "info_ASC"
+  | "info_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -484,6 +488,34 @@ export interface TrackWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  module?: String;
+  module_not?: String;
+  module_in?: String[] | String;
+  module_not_in?: String[] | String;
+  module_lt?: String;
+  module_lte?: String;
+  module_gt?: String;
+  module_gte?: String;
+  module_contains?: String;
+  module_not_contains?: String;
+  module_starts_with?: String;
+  module_not_starts_with?: String;
+  module_ends_with?: String;
+  module_not_ends_with?: String;
+  info?: String;
+  info_not?: String;
+  info_in?: String[] | String;
+  info_not_in?: String[] | String;
+  info_lt?: String;
+  info_lte?: String;
+  info_gt?: String;
+  info_gte?: String;
+  info_contains?: String;
+  info_not_contains?: String;
+  info_starts_with?: String;
+  info_not_starts_with?: String;
+  info_ends_with?: String;
+  info_not_ends_with?: String;
   AND?: TrackWhereInput[] | TrackWhereInput;
   OR?: TrackWhereInput[] | TrackWhereInput;
   NOT?: TrackWhereInput[] | TrackWhereInput;
@@ -1016,14 +1048,20 @@ export interface PostUpdateManyMutationInput {
 
 export interface TrackCreateInput {
   name: String;
+  module: String;
+  info: String;
 }
 
 export interface TrackUpdateInput {
   name?: String;
+  module?: String;
+  info?: String;
 }
 
 export interface TrackUpdateManyMutationInput {
   name?: String;
+  module?: String;
+  info?: String;
 }
 
 export interface UserUpdateInput {
@@ -1370,11 +1408,15 @@ export interface AggregatePostSubscription
 export interface Track {
   id: ID_Output;
   name: String;
+  module: String;
+  info: String;
 }
 
 export interface TrackPromise extends Promise<Track>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  module: () => Promise<String>;
+  info: () => Promise<String>;
 }
 
 export interface TrackSubscription
@@ -1382,6 +1424,8 @@ export interface TrackSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  module: () => Promise<AsyncIterator<String>>;
+  info: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TrackConnection {
@@ -1636,6 +1680,8 @@ export interface TrackSubscriptionPayloadSubscription
 export interface TrackPreviousValues {
   id: ID_Output;
   name: String;
+  module: String;
+  info: String;
 }
 
 export interface TrackPreviousValuesPromise
@@ -1643,6 +1689,8 @@ export interface TrackPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  module: () => Promise<String>;
+  info: () => Promise<String>;
 }
 
 export interface TrackPreviousValuesSubscription
@@ -1650,6 +1698,8 @@ export interface TrackPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  module: () => Promise<AsyncIterator<String>>;
+  info: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {

@@ -12,6 +12,8 @@ type Query {
 type Track {
 	id: ID
 	name: String!
+	module: String!
+	info: String!
 }
 type Mutation {
 	signup(email: String!, password: String!, name: String): AuthPayload!

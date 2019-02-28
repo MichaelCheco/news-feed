@@ -630,6 +630,8 @@ type Subscription {
 type Track {
   id: ID!
   name: String!
+  module: String!
+  info: String!
 }
 
 type TrackConnection {
@@ -640,6 +642,8 @@ type TrackConnection {
 
 input TrackCreateInput {
   name: String!
+  module: String!
+  info: String!
 }
 
 type TrackEdge {
@@ -652,6 +656,10 @@ enum TrackOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  module_ASC
+  module_DESC
+  info_ASC
+  info_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -661,6 +669,8 @@ enum TrackOrderByInput {
 type TrackPreviousValues {
   id: ID!
   name: String!
+  module: String!
+  info: String!
 }
 
 type TrackSubscriptionPayload {
@@ -683,10 +693,14 @@ input TrackSubscriptionWhereInput {
 
 input TrackUpdateInput {
   name: String
+  module: String
+  info: String
 }
 
 input TrackUpdateManyMutationInput {
   name: String
+  module: String
+  info: String
 }
 
 input TrackWhereInput {
@@ -718,6 +732,34 @@ input TrackWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  module: String
+  module_not: String
+  module_in: [String!]
+  module_not_in: [String!]
+  module_lt: String
+  module_lte: String
+  module_gt: String
+  module_gte: String
+  module_contains: String
+  module_not_contains: String
+  module_starts_with: String
+  module_not_starts_with: String
+  module_ends_with: String
+  module_not_ends_with: String
+  info: String
+  info_not: String
+  info_in: [String!]
+  info_not_in: [String!]
+  info_lt: String
+  info_lte: String
+  info_gt: String
+  info_gte: String
+  info_contains: String
+  info_not_contains: String
+  info_starts_with: String
+  info_not_starts_with: String
+  info_ends_with: String
+  info_not_ends_with: String
   AND: [TrackWhereInput!]
   OR: [TrackWhereInput!]
   NOT: [TrackWhereInput!]
