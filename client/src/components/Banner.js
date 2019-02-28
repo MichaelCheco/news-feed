@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
-/* darkBlue: '#004466',
-	mediumBlue: '#036699',
-	lightBlue: '#99CBCC',
-	lightGrey: '#E4E5E6',
-	red */
+
 const Div = styled.div`
 	width: 100%;
 
@@ -52,6 +48,10 @@ const LogoStylesN = styled.div`
 `;
 const P = styled.p`
 	font-size: 1.5rem;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.8;
+	}
 `;
 const AuthWrapper = styled.div`
 	@media (min-width: 375px) {
