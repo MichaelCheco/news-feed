@@ -15,6 +15,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 
 export interface Exists {
   comment: (where?: CommentWhereInput) => Promise<boolean>;
+  module: (where?: ModuleWhereInput) => Promise<boolean>;
   post: (where?: PostWhereInput) => Promise<boolean>;
   track: (where?: TrackWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -58,6 +59,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CommentConnectionPromise;
+  module: (where: ModuleWhereUniqueInput) => ModulePromise;
+  modules: (args?: {
+    where?: ModuleWhereInput;
+    orderBy?: ModuleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Module>;
+  modulesConnection: (args?: {
+    where?: ModuleWhereInput;
+    orderBy?: ModuleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ModuleConnectionPromise;
   post: (where: PostWhereUniqueInput) => PostPromise;
   posts: (args?: {
     where?: PostWhereInput;
@@ -137,6 +157,22 @@ export interface Prisma {
   }) => CommentPromise;
   deleteComment: (where: CommentWhereUniqueInput) => CommentPromise;
   deleteManyComments: (where?: CommentWhereInput) => BatchPayloadPromise;
+  createModule: (data: ModuleCreateInput) => ModulePromise;
+  updateModule: (args: {
+    data: ModuleUpdateInput;
+    where: ModuleWhereUniqueInput;
+  }) => ModulePromise;
+  updateManyModules: (args: {
+    data: ModuleUpdateManyMutationInput;
+    where?: ModuleWhereInput;
+  }) => BatchPayloadPromise;
+  upsertModule: (args: {
+    where: ModuleWhereUniqueInput;
+    create: ModuleCreateInput;
+    update: ModuleUpdateInput;
+  }) => ModulePromise;
+  deleteModule: (where: ModuleWhereUniqueInput) => ModulePromise;
+  deleteManyModules: (where?: ModuleWhereInput) => BatchPayloadPromise;
   createPost: (data: PostCreateInput) => PostPromise;
   updatePost: (args: {
     data: PostUpdateInput;
@@ -197,6 +233,9 @@ export interface Subscription {
   comment: (
     where?: CommentSubscriptionWhereInput
   ) => CommentSubscriptionPayloadSubscription;
+  module: (
+    where?: ModuleSubscriptionWhereInput
+  ) => ModuleSubscriptionPayloadSubscription;
   post: (
     where?: PostSubscriptionWhereInput
   ) => PostSubscriptionPayloadSubscription;
@@ -254,15 +293,23 @@ export type UserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type ModuleOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "info_ASC"
+  | "info_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type TrackOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
-  | "module_ASC"
-  | "module_DESC"
-  | "info_ASC"
-  | "info_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -451,6 +498,59 @@ export interface CommentWhereInput {
   NOT?: CommentWhereInput[] | CommentWhereInput;
 }
 
+export type ModuleWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ModuleWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  info?: String;
+  info_not?: String;
+  info_in?: String[] | String;
+  info_not_in?: String[] | String;
+  info_lt?: String;
+  info_lte?: String;
+  info_gt?: String;
+  info_gte?: String;
+  info_contains?: String;
+  info_not_contains?: String;
+  info_starts_with?: String;
+  info_not_starts_with?: String;
+  info_ends_with?: String;
+  info_not_ends_with?: String;
+  track?: PostWhereInput;
+  AND?: ModuleWhereInput[] | ModuleWhereInput;
+  OR?: ModuleWhereInput[] | ModuleWhereInput;
+  NOT?: ModuleWhereInput[] | ModuleWhereInput;
+}
+
 export type PostWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
@@ -488,34 +588,6 @@ export interface TrackWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
-  module?: String;
-  module_not?: String;
-  module_in?: String[] | String;
-  module_not_in?: String[] | String;
-  module_lt?: String;
-  module_lte?: String;
-  module_gt?: String;
-  module_gte?: String;
-  module_contains?: String;
-  module_not_contains?: String;
-  module_starts_with?: String;
-  module_not_starts_with?: String;
-  module_ends_with?: String;
-  module_not_ends_with?: String;
-  info?: String;
-  info_not?: String;
-  info_in?: String[] | String;
-  info_not_in?: String[] | String;
-  info_lt?: String;
-  info_lte?: String;
-  info_gt?: String;
-  info_gte?: String;
-  info_contains?: String;
-  info_not_contains?: String;
-  info_starts_with?: String;
-  info_not_starts_with?: String;
-  info_ends_with?: String;
-  info_not_ends_with?: String;
   AND?: TrackWhereInput[] | TrackWhereInput;
   OR?: TrackWhereInput[] | TrackWhereInput;
   NOT?: TrackWhereInput[] | TrackWhereInput;
@@ -1024,12 +1096,54 @@ export interface CommentUpdateManyMutationInput {
   text?: String;
 }
 
+export interface ModuleCreateInput {
+  name: String;
+  info: String;
+  track: PostCreateOneInput;
+}
+
+export interface PostCreateOneInput {
+  create?: PostCreateInput;
+  connect?: PostWhereUniqueInput;
+}
+
 export interface PostCreateInput {
   title: String;
   content: String;
   published?: Boolean;
   author: UserCreateOneWithoutPostsInput;
   comments?: CommentCreateManyWithoutPostInput;
+}
+
+export interface ModuleUpdateInput {
+  name?: String;
+  info?: String;
+  track?: PostUpdateOneRequiredInput;
+}
+
+export interface PostUpdateOneRequiredInput {
+  create?: PostCreateInput;
+  update?: PostUpdateDataInput;
+  upsert?: PostUpsertNestedInput;
+  connect?: PostWhereUniqueInput;
+}
+
+export interface PostUpdateDataInput {
+  title?: String;
+  content?: String;
+  published?: Boolean;
+  author?: UserUpdateOneRequiredWithoutPostsInput;
+  comments?: CommentUpdateManyWithoutPostInput;
+}
+
+export interface PostUpsertNestedInput {
+  update: PostUpdateDataInput;
+  create: PostCreateInput;
+}
+
+export interface ModuleUpdateManyMutationInput {
+  name?: String;
+  info?: String;
 }
 
 export interface PostUpdateInput {
@@ -1048,20 +1162,14 @@ export interface PostUpdateManyMutationInput {
 
 export interface TrackCreateInput {
   name: String;
-  module: String;
-  info: String;
 }
 
 export interface TrackUpdateInput {
   name?: String;
-  module?: String;
-  info?: String;
 }
 
 export interface TrackUpdateManyMutationInput {
   name?: String;
-  module?: String;
-  info?: String;
 }
 
 export interface UserUpdateInput {
@@ -1088,6 +1196,17 @@ export interface CommentSubscriptionWhereInput {
   AND?: CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput;
   OR?: CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput;
   NOT?: CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput;
+}
+
+export interface ModuleSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ModuleWhereInput;
+  AND?: ModuleSubscriptionWhereInput[] | ModuleSubscriptionWhereInput;
+  OR?: ModuleSubscriptionWhereInput[] | ModuleSubscriptionWhereInput;
+  NOT?: ModuleSubscriptionWhereInput[] | ModuleSubscriptionWhereInput;
 }
 
 export interface PostSubscriptionWhereInput {
@@ -1351,6 +1470,82 @@ export interface AggregateCommentSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface Module {
+  id: ID_Output;
+  name: String;
+  info: String;
+}
+
+export interface ModulePromise extends Promise<Module>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  info: () => Promise<String>;
+  track: <T = PostPromise>() => T;
+}
+
+export interface ModuleSubscription
+  extends Promise<AsyncIterator<Module>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  info: () => Promise<AsyncIterator<String>>;
+  track: <T = PostSubscription>() => T;
+}
+
+export interface ModuleConnection {
+  pageInfo: PageInfo;
+  edges: ModuleEdge[];
+}
+
+export interface ModuleConnectionPromise
+  extends Promise<ModuleConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ModuleEdge>>() => T;
+  aggregate: <T = AggregateModulePromise>() => T;
+}
+
+export interface ModuleConnectionSubscription
+  extends Promise<AsyncIterator<ModuleConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ModuleEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateModuleSubscription>() => T;
+}
+
+export interface ModuleEdge {
+  node: Module;
+  cursor: String;
+}
+
+export interface ModuleEdgePromise extends Promise<ModuleEdge>, Fragmentable {
+  node: <T = ModulePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ModuleEdgeSubscription
+  extends Promise<AsyncIterator<ModuleEdge>>,
+    Fragmentable {
+  node: <T = ModuleSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateModule {
+  count: Int;
+}
+
+export interface AggregateModulePromise
+  extends Promise<AggregateModule>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateModuleSubscription
+  extends Promise<AsyncIterator<AggregateModule>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface PostConnection {
   pageInfo: PageInfo;
   edges: PostEdge[];
@@ -1408,15 +1603,11 @@ export interface AggregatePostSubscription
 export interface Track {
   id: ID_Output;
   name: String;
-  module: String;
-  info: String;
 }
 
 export interface TrackPromise extends Promise<Track>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  module: () => Promise<String>;
-  info: () => Promise<String>;
 }
 
 export interface TrackSubscription
@@ -1424,8 +1615,6 @@ export interface TrackSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  module: () => Promise<AsyncIterator<String>>;
-  info: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TrackConnection {
@@ -1596,6 +1785,53 @@ export interface CommentPreviousValuesSubscription
   text: () => Promise<AsyncIterator<String>>;
 }
 
+export interface ModuleSubscriptionPayload {
+  mutation: MutationType;
+  node: Module;
+  updatedFields: String[];
+  previousValues: ModulePreviousValues;
+}
+
+export interface ModuleSubscriptionPayloadPromise
+  extends Promise<ModuleSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ModulePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ModulePreviousValuesPromise>() => T;
+}
+
+export interface ModuleSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ModuleSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ModuleSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ModulePreviousValuesSubscription>() => T;
+}
+
+export interface ModulePreviousValues {
+  id: ID_Output;
+  name: String;
+  info: String;
+}
+
+export interface ModulePreviousValuesPromise
+  extends Promise<ModulePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  info: () => Promise<String>;
+}
+
+export interface ModulePreviousValuesSubscription
+  extends Promise<AsyncIterator<ModulePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  info: () => Promise<AsyncIterator<String>>;
+}
+
 export interface PostSubscriptionPayload {
   mutation: MutationType;
   node: Post;
@@ -1680,8 +1916,6 @@ export interface TrackSubscriptionPayloadSubscription
 export interface TrackPreviousValues {
   id: ID_Output;
   name: String;
-  module: String;
-  info: String;
 }
 
 export interface TrackPreviousValuesPromise
@@ -1689,8 +1923,6 @@ export interface TrackPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  module: () => Promise<String>;
-  info: () => Promise<String>;
 }
 
 export interface TrackPreviousValuesSubscription
@@ -1698,8 +1930,6 @@ export interface TrackPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  module: () => Promise<AsyncIterator<String>>;
-  info: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -1792,6 +2022,10 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "Comment",
+    embedded: false
+  },
+  {
+    name: "Module",
     embedded: false
   },
   {

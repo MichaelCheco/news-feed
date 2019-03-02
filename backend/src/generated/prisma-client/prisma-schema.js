@@ -3,6 +3,10 @@ module.exports = {
   count: Int!
 }
 
+type AggregateModule {
+  count: Int!
+}
+
 type AggregatePost {
   count: Int!
 }
@@ -250,6 +254,131 @@ scalar DateTime
 
 scalar Long
 
+type Module {
+  id: ID!
+  name: String!
+  info: String!
+  track: Post!
+}
+
+type ModuleConnection {
+  pageInfo: PageInfo!
+  edges: [ModuleEdge]!
+  aggregate: AggregateModule!
+}
+
+input ModuleCreateInput {
+  name: String!
+  info: String!
+  track: PostCreateOneInput!
+}
+
+type ModuleEdge {
+  node: Module!
+  cursor: String!
+}
+
+enum ModuleOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  info_ASC
+  info_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ModulePreviousValues {
+  id: ID!
+  name: String!
+  info: String!
+}
+
+type ModuleSubscriptionPayload {
+  mutation: MutationType!
+  node: Module
+  updatedFields: [String!]
+  previousValues: ModulePreviousValues
+}
+
+input ModuleSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ModuleWhereInput
+  AND: [ModuleSubscriptionWhereInput!]
+  OR: [ModuleSubscriptionWhereInput!]
+  NOT: [ModuleSubscriptionWhereInput!]
+}
+
+input ModuleUpdateInput {
+  name: String
+  info: String
+  track: PostUpdateOneRequiredInput
+}
+
+input ModuleUpdateManyMutationInput {
+  name: String
+  info: String
+}
+
+input ModuleWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  info: String
+  info_not: String
+  info_in: [String!]
+  info_not_in: [String!]
+  info_lt: String
+  info_lte: String
+  info_gt: String
+  info_gte: String
+  info_contains: String
+  info_not_contains: String
+  info_starts_with: String
+  info_not_starts_with: String
+  info_ends_with: String
+  info_not_ends_with: String
+  track: PostWhereInput
+  AND: [ModuleWhereInput!]
+  OR: [ModuleWhereInput!]
+  NOT: [ModuleWhereInput!]
+}
+
+input ModuleWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createComment(data: CommentCreateInput!): Comment!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
@@ -257,6 +386,12 @@ type Mutation {
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createModule(data: ModuleCreateInput!): Module!
+  updateModule(data: ModuleUpdateInput!, where: ModuleWhereUniqueInput!): Module
+  updateManyModules(data: ModuleUpdateManyMutationInput!, where: ModuleWhereInput): BatchPayload!
+  upsertModule(where: ModuleWhereUniqueInput!, create: ModuleCreateInput!, update: ModuleUpdateInput!): Module!
+  deleteModule(where: ModuleWhereUniqueInput!): Module
+  deleteManyModules(where: ModuleWhereInput): BatchPayload!
   createPost(data: PostCreateInput!): Post!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
@@ -322,6 +457,11 @@ input PostCreateInput {
 input PostCreateManyWithoutAuthorInput {
   create: [PostCreateWithoutAuthorInput!]
   connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateOneInput {
+  create: PostCreateInput
+  connect: PostWhereUniqueInput
 }
 
 input PostCreateOneWithoutCommentsInput {
@@ -456,6 +596,14 @@ input PostSubscriptionWhereInput {
   NOT: [PostSubscriptionWhereInput!]
 }
 
+input PostUpdateDataInput {
+  title: String
+  content: String
+  published: Boolean
+  author: UserUpdateOneRequiredWithoutPostsInput
+  comments: CommentUpdateManyWithoutPostInput
+}
+
 input PostUpdateInput {
   title: String
   content: String
@@ -493,6 +641,13 @@ input PostUpdateManyWithWhereNestedInput {
   data: PostUpdateManyDataInput!
 }
 
+input PostUpdateOneRequiredInput {
+  create: PostCreateInput
+  update: PostUpdateDataInput
+  upsert: PostUpsertNestedInput
+  connect: PostWhereUniqueInput
+}
+
 input PostUpdateOneRequiredWithoutCommentsInput {
   create: PostCreateWithoutCommentsInput
   update: PostUpdateWithoutCommentsDataInput
@@ -517,6 +672,11 @@ input PostUpdateWithoutCommentsDataInput {
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
   where: PostWhereUniqueInput!
   data: PostUpdateWithoutAuthorDataInput!
+}
+
+input PostUpsertNestedInput {
+  update: PostUpdateDataInput!
+  create: PostCreateInput!
 }
 
 input PostUpsertWithoutCommentsInput {
@@ -608,6 +768,9 @@ type Query {
   comment(where: CommentWhereUniqueInput!): Comment
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  module(where: ModuleWhereUniqueInput!): Module
+  modules(where: ModuleWhereInput, orderBy: ModuleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Module]!
+  modulesConnection(where: ModuleWhereInput, orderBy: ModuleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ModuleConnection!
   post(where: PostWhereUniqueInput!): Post
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
@@ -622,6 +785,7 @@ type Query {
 
 type Subscription {
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  module(where: ModuleSubscriptionWhereInput): ModuleSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -630,8 +794,6 @@ type Subscription {
 type Track {
   id: ID!
   name: String!
-  module: String!
-  info: String!
 }
 
 type TrackConnection {
@@ -642,8 +804,6 @@ type TrackConnection {
 
 input TrackCreateInput {
   name: String!
-  module: String!
-  info: String!
 }
 
 type TrackEdge {
@@ -656,10 +816,6 @@ enum TrackOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  module_ASC
-  module_DESC
-  info_ASC
-  info_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -669,8 +825,6 @@ enum TrackOrderByInput {
 type TrackPreviousValues {
   id: ID!
   name: String!
-  module: String!
-  info: String!
 }
 
 type TrackSubscriptionPayload {
@@ -693,14 +847,10 @@ input TrackSubscriptionWhereInput {
 
 input TrackUpdateInput {
   name: String
-  module: String
-  info: String
 }
 
 input TrackUpdateManyMutationInput {
   name: String
-  module: String
-  info: String
 }
 
 input TrackWhereInput {
@@ -732,34 +882,6 @@ input TrackWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  module: String
-  module_not: String
-  module_in: [String!]
-  module_not_in: [String!]
-  module_lt: String
-  module_lte: String
-  module_gt: String
-  module_gte: String
-  module_contains: String
-  module_not_contains: String
-  module_starts_with: String
-  module_not_starts_with: String
-  module_ends_with: String
-  module_not_ends_with: String
-  info: String
-  info_not: String
-  info_in: [String!]
-  info_not_in: [String!]
-  info_lt: String
-  info_lte: String
-  info_gt: String
-  info_gte: String
-  info_contains: String
-  info_not_contains: String
-  info_starts_with: String
-  info_not_starts_with: String
-  info_ends_with: String
-  info_not_ends_with: String
   AND: [TrackWhereInput!]
   OR: [TrackWhereInput!]
   NOT: [TrackWhereInput!]

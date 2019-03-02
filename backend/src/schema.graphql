@@ -12,8 +12,7 @@ type Query {
 type Track {
 	id: ID
 	name: String!
-	module: String!
-	info: String!
+	module: [Module]
 }
 type Mutation {
 	signup(email: String!, password: String!, name: String): AuthPayload!
@@ -22,6 +21,7 @@ type Mutation {
 	updatePost(title: String, content: String, id: ID!): Post
 	deletePost(id: ID!): Post
 	createTrack(name: String!): Track!
+	createModule(id: String!, name: String!, info: String!): Module!
 	# writeComment(text: String!, postId: ID!): Comment
 }
 
@@ -37,6 +37,13 @@ type User {
 	# friends: [User]
 	# comments: [Comment!]!
 }
+type Module {
+	id: ID
+	name: String!
+	info: String!
+	track: Track!
+}
+
 type Post {
 	id: ID!
 	createdAt: DateTime!
