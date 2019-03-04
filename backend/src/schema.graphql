@@ -22,7 +22,6 @@ type Mutation {
 	deletePost(id: ID!): Post
 	createTrack(name: String!): Track!
 	createModule(id: String!, name: String!, info: String!): Module!
-	# writeComment(text: String!, postId: ID!): Comment
 }
 
 type Subscription {
@@ -34,8 +33,6 @@ type User {
 	name: String!
 	email: String!
 	posts: [Post!]!
-	# friends: [User]
-	# comments: [Comment!]!
 }
 type Module {
 	id: ID
@@ -52,15 +49,8 @@ type Post {
 	title: String!
 	content: String
 	author: User!
-	# comments: [Comment!]!
 }
 
-# type Comment {
-#   id: ID!
-#   text: String!
-#   writtenBy: User!
-#   post: Post!
-# }
 type AuthPayload {
 	token: String!
 	user: User!

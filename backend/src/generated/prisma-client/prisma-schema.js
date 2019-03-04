@@ -258,7 +258,7 @@ type Module {
   id: ID!
   name: String!
   info: String!
-  track: Post!
+  track: Track!
 }
 
 type ModuleConnection {
@@ -270,7 +270,17 @@ type ModuleConnection {
 input ModuleCreateInput {
   name: String!
   info: String!
-  track: PostCreateOneInput!
+  track: TrackCreateOneWithoutModulesInput!
+}
+
+input ModuleCreateManyWithoutTrackInput {
+  create: [ModuleCreateWithoutTrackInput!]
+  connect: [ModuleWhereUniqueInput!]
+}
+
+input ModuleCreateWithoutTrackInput {
+  name: String!
+  info: String!
 }
 
 type ModuleEdge {
@@ -297,6 +307,54 @@ type ModulePreviousValues {
   info: String!
 }
 
+input ModuleScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  info: String
+  info_not: String
+  info_in: [String!]
+  info_not_in: [String!]
+  info_lt: String
+  info_lte: String
+  info_gt: String
+  info_gte: String
+  info_contains: String
+  info_not_contains: String
+  info_starts_with: String
+  info_not_starts_with: String
+  info_ends_with: String
+  info_not_ends_with: String
+  AND: [ModuleScalarWhereInput!]
+  OR: [ModuleScalarWhereInput!]
+  NOT: [ModuleScalarWhereInput!]
+}
+
 type ModuleSubscriptionPayload {
   mutation: MutationType!
   node: Module
@@ -318,12 +376,50 @@ input ModuleSubscriptionWhereInput {
 input ModuleUpdateInput {
   name: String
   info: String
-  track: PostUpdateOneRequiredInput
+  track: TrackUpdateOneRequiredWithoutModulesInput
+}
+
+input ModuleUpdateManyDataInput {
+  name: String
+  info: String
 }
 
 input ModuleUpdateManyMutationInput {
   name: String
   info: String
+}
+
+input ModuleUpdateManyWithoutTrackInput {
+  create: [ModuleCreateWithoutTrackInput!]
+  delete: [ModuleWhereUniqueInput!]
+  connect: [ModuleWhereUniqueInput!]
+  set: [ModuleWhereUniqueInput!]
+  disconnect: [ModuleWhereUniqueInput!]
+  update: [ModuleUpdateWithWhereUniqueWithoutTrackInput!]
+  upsert: [ModuleUpsertWithWhereUniqueWithoutTrackInput!]
+  deleteMany: [ModuleScalarWhereInput!]
+  updateMany: [ModuleUpdateManyWithWhereNestedInput!]
+}
+
+input ModuleUpdateManyWithWhereNestedInput {
+  where: ModuleScalarWhereInput!
+  data: ModuleUpdateManyDataInput!
+}
+
+input ModuleUpdateWithoutTrackDataInput {
+  name: String
+  info: String
+}
+
+input ModuleUpdateWithWhereUniqueWithoutTrackInput {
+  where: ModuleWhereUniqueInput!
+  data: ModuleUpdateWithoutTrackDataInput!
+}
+
+input ModuleUpsertWithWhereUniqueWithoutTrackInput {
+  where: ModuleWhereUniqueInput!
+  update: ModuleUpdateWithoutTrackDataInput!
+  create: ModuleCreateWithoutTrackInput!
 }
 
 input ModuleWhereInput {
@@ -369,7 +465,7 @@ input ModuleWhereInput {
   info_not_starts_with: String
   info_ends_with: String
   info_not_ends_with: String
-  track: PostWhereInput
+  track: TrackWhereInput
   AND: [ModuleWhereInput!]
   OR: [ModuleWhereInput!]
   NOT: [ModuleWhereInput!]
@@ -457,11 +553,6 @@ input PostCreateInput {
 input PostCreateManyWithoutAuthorInput {
   create: [PostCreateWithoutAuthorInput!]
   connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateOneInput {
-  create: PostCreateInput
-  connect: PostWhereUniqueInput
 }
 
 input PostCreateOneWithoutCommentsInput {
@@ -596,14 +687,6 @@ input PostSubscriptionWhereInput {
   NOT: [PostSubscriptionWhereInput!]
 }
 
-input PostUpdateDataInput {
-  title: String
-  content: String
-  published: Boolean
-  author: UserUpdateOneRequiredWithoutPostsInput
-  comments: CommentUpdateManyWithoutPostInput
-}
-
 input PostUpdateInput {
   title: String
   content: String
@@ -641,13 +724,6 @@ input PostUpdateManyWithWhereNestedInput {
   data: PostUpdateManyDataInput!
 }
 
-input PostUpdateOneRequiredInput {
-  create: PostCreateInput
-  update: PostUpdateDataInput
-  upsert: PostUpsertNestedInput
-  connect: PostWhereUniqueInput
-}
-
 input PostUpdateOneRequiredWithoutCommentsInput {
   create: PostCreateWithoutCommentsInput
   update: PostUpdateWithoutCommentsDataInput
@@ -672,11 +748,6 @@ input PostUpdateWithoutCommentsDataInput {
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
   where: PostWhereUniqueInput!
   data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertNestedInput {
-  update: PostUpdateDataInput!
-  create: PostCreateInput!
 }
 
 input PostUpsertWithoutCommentsInput {
@@ -794,6 +865,7 @@ type Subscription {
 type Track {
   id: ID!
   name: String!
+  modules(where: ModuleWhereInput, orderBy: ModuleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Module!]
 }
 
 type TrackConnection {
@@ -803,6 +875,16 @@ type TrackConnection {
 }
 
 input TrackCreateInput {
+  name: String!
+  modules: ModuleCreateManyWithoutTrackInput
+}
+
+input TrackCreateOneWithoutModulesInput {
+  create: TrackCreateWithoutModulesInput
+  connect: TrackWhereUniqueInput
+}
+
+input TrackCreateWithoutModulesInput {
   name: String!
 }
 
@@ -847,10 +929,27 @@ input TrackSubscriptionWhereInput {
 
 input TrackUpdateInput {
   name: String
+  modules: ModuleUpdateManyWithoutTrackInput
 }
 
 input TrackUpdateManyMutationInput {
   name: String
+}
+
+input TrackUpdateOneRequiredWithoutModulesInput {
+  create: TrackCreateWithoutModulesInput
+  update: TrackUpdateWithoutModulesDataInput
+  upsert: TrackUpsertWithoutModulesInput
+  connect: TrackWhereUniqueInput
+}
+
+input TrackUpdateWithoutModulesDataInput {
+  name: String
+}
+
+input TrackUpsertWithoutModulesInput {
+  update: TrackUpdateWithoutModulesDataInput!
+  create: TrackCreateWithoutModulesInput!
 }
 
 input TrackWhereInput {
@@ -882,6 +981,9 @@ input TrackWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  modules_every: ModuleWhereInput
+  modules_some: ModuleWhereInput
+  modules_none: ModuleWhereInput
   AND: [TrackWhereInput!]
   OR: [TrackWhereInput!]
   NOT: [TrackWhereInput!]

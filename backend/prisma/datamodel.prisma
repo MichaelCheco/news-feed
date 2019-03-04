@@ -27,10 +27,11 @@ type Comment {
 type Track {
 	id: ID! @unique
 	name: String!
+	modules: [Module!]!
 }
 type Module {
 	id: ID! @unique
 	name: String!
 	info: String!
-	track: Post!
+	track: Track!
 }

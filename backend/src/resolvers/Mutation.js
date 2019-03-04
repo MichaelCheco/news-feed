@@ -43,8 +43,6 @@ const Mutation = {
 		return ctx.prisma.updatePost({
 			data: updates,
 			where: { id: args.id },
-			//   where: { id },
-			//   data: { title, content }
 		});
 	},
 	deletePost: async (parent, { id }, ctx) => {
@@ -60,28 +58,6 @@ const Mutation = {
 			track: { connect: { id: args.id } },
 		});
 	},
-	//   updateUser: async ( parent, { id, email }, ctx) => {
-	//       return ctx.prisma.updateUser({
-	//           where: { id },
-	//           data: {
-	//               friends: {
-	//                   connect: [{ email}]
-	//               }
-	//           }
-	//       })
-	//   }
-	//   writeComment: async (parent, { text, postId }, ctx) => {
-	//       const userId =await  getUserId(ctx)
-	//       return ctx.prisma.createComment({
-	//           text,
-	//           writtenBy: {
-	//               connect: { id: userId }
-	//           },
-	//           post: {
-	//               connect: { id: postId }
-	//           },
-	//       })
-	//   }
 };
 
 module.exports = {

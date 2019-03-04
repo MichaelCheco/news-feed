@@ -545,19 +545,11 @@ export interface ModuleWhereInput {
   info_not_starts_with?: String;
   info_ends_with?: String;
   info_not_ends_with?: String;
-  track?: PostWhereInput;
+  track?: TrackWhereInput;
   AND?: ModuleWhereInput[] | ModuleWhereInput;
   OR?: ModuleWhereInput[] | ModuleWhereInput;
   NOT?: ModuleWhereInput[] | ModuleWhereInput;
 }
-
-export type PostWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export type TrackWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
 
 export interface TrackWhereInput {
   id?: ID_Input;
@@ -588,10 +580,21 @@ export interface TrackWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  modules_every?: ModuleWhereInput;
+  modules_some?: ModuleWhereInput;
+  modules_none?: ModuleWhereInput;
   AND?: TrackWhereInput[] | TrackWhereInput;
   OR?: TrackWhereInput[] | TrackWhereInput;
   NOT?: TrackWhereInput[] | TrackWhereInput;
 }
+
+export type PostWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export type TrackWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
@@ -1099,12 +1102,43 @@ export interface CommentUpdateManyMutationInput {
 export interface ModuleCreateInput {
   name: String;
   info: String;
-  track: PostCreateOneInput;
+  track: TrackCreateOneWithoutModulesInput;
 }
 
-export interface PostCreateOneInput {
-  create?: PostCreateInput;
-  connect?: PostWhereUniqueInput;
+export interface TrackCreateOneWithoutModulesInput {
+  create?: TrackCreateWithoutModulesInput;
+  connect?: TrackWhereUniqueInput;
+}
+
+export interface TrackCreateWithoutModulesInput {
+  name: String;
+}
+
+export interface ModuleUpdateInput {
+  name?: String;
+  info?: String;
+  track?: TrackUpdateOneRequiredWithoutModulesInput;
+}
+
+export interface TrackUpdateOneRequiredWithoutModulesInput {
+  create?: TrackCreateWithoutModulesInput;
+  update?: TrackUpdateWithoutModulesDataInput;
+  upsert?: TrackUpsertWithoutModulesInput;
+  connect?: TrackWhereUniqueInput;
+}
+
+export interface TrackUpdateWithoutModulesDataInput {
+  name?: String;
+}
+
+export interface TrackUpsertWithoutModulesInput {
+  update: TrackUpdateWithoutModulesDataInput;
+  create: TrackCreateWithoutModulesInput;
+}
+
+export interface ModuleUpdateManyMutationInput {
+  name?: String;
+  info?: String;
 }
 
 export interface PostCreateInput {
@@ -1113,37 +1147,6 @@ export interface PostCreateInput {
   published?: Boolean;
   author: UserCreateOneWithoutPostsInput;
   comments?: CommentCreateManyWithoutPostInput;
-}
-
-export interface ModuleUpdateInput {
-  name?: String;
-  info?: String;
-  track?: PostUpdateOneRequiredInput;
-}
-
-export interface PostUpdateOneRequiredInput {
-  create?: PostCreateInput;
-  update?: PostUpdateDataInput;
-  upsert?: PostUpsertNestedInput;
-  connect?: PostWhereUniqueInput;
-}
-
-export interface PostUpdateDataInput {
-  title?: String;
-  content?: String;
-  published?: Boolean;
-  author?: UserUpdateOneRequiredWithoutPostsInput;
-  comments?: CommentUpdateManyWithoutPostInput;
-}
-
-export interface PostUpsertNestedInput {
-  update: PostUpdateDataInput;
-  create: PostCreateInput;
-}
-
-export interface ModuleUpdateManyMutationInput {
-  name?: String;
-  info?: String;
 }
 
 export interface PostUpdateInput {
@@ -1162,10 +1165,114 @@ export interface PostUpdateManyMutationInput {
 
 export interface TrackCreateInput {
   name: String;
+  modules?: ModuleCreateManyWithoutTrackInput;
+}
+
+export interface ModuleCreateManyWithoutTrackInput {
+  create?: ModuleCreateWithoutTrackInput[] | ModuleCreateWithoutTrackInput;
+  connect?: ModuleWhereUniqueInput[] | ModuleWhereUniqueInput;
+}
+
+export interface ModuleCreateWithoutTrackInput {
+  name: String;
+  info: String;
 }
 
 export interface TrackUpdateInput {
   name?: String;
+  modules?: ModuleUpdateManyWithoutTrackInput;
+}
+
+export interface ModuleUpdateManyWithoutTrackInput {
+  create?: ModuleCreateWithoutTrackInput[] | ModuleCreateWithoutTrackInput;
+  delete?: ModuleWhereUniqueInput[] | ModuleWhereUniqueInput;
+  connect?: ModuleWhereUniqueInput[] | ModuleWhereUniqueInput;
+  set?: ModuleWhereUniqueInput[] | ModuleWhereUniqueInput;
+  disconnect?: ModuleWhereUniqueInput[] | ModuleWhereUniqueInput;
+  update?:
+    | ModuleUpdateWithWhereUniqueWithoutTrackInput[]
+    | ModuleUpdateWithWhereUniqueWithoutTrackInput;
+  upsert?:
+    | ModuleUpsertWithWhereUniqueWithoutTrackInput[]
+    | ModuleUpsertWithWhereUniqueWithoutTrackInput;
+  deleteMany?: ModuleScalarWhereInput[] | ModuleScalarWhereInput;
+  updateMany?:
+    | ModuleUpdateManyWithWhereNestedInput[]
+    | ModuleUpdateManyWithWhereNestedInput;
+}
+
+export interface ModuleUpdateWithWhereUniqueWithoutTrackInput {
+  where: ModuleWhereUniqueInput;
+  data: ModuleUpdateWithoutTrackDataInput;
+}
+
+export interface ModuleUpdateWithoutTrackDataInput {
+  name?: String;
+  info?: String;
+}
+
+export interface ModuleUpsertWithWhereUniqueWithoutTrackInput {
+  where: ModuleWhereUniqueInput;
+  update: ModuleUpdateWithoutTrackDataInput;
+  create: ModuleCreateWithoutTrackInput;
+}
+
+export interface ModuleScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  info?: String;
+  info_not?: String;
+  info_in?: String[] | String;
+  info_not_in?: String[] | String;
+  info_lt?: String;
+  info_lte?: String;
+  info_gt?: String;
+  info_gte?: String;
+  info_contains?: String;
+  info_not_contains?: String;
+  info_starts_with?: String;
+  info_not_starts_with?: String;
+  info_ends_with?: String;
+  info_not_ends_with?: String;
+  AND?: ModuleScalarWhereInput[] | ModuleScalarWhereInput;
+  OR?: ModuleScalarWhereInput[] | ModuleScalarWhereInput;
+  NOT?: ModuleScalarWhereInput[] | ModuleScalarWhereInput;
+}
+
+export interface ModuleUpdateManyWithWhereNestedInput {
+  where: ModuleScalarWhereInput;
+  data: ModuleUpdateManyDataInput;
+}
+
+export interface ModuleUpdateManyDataInput {
+  name?: String;
+  info?: String;
 }
 
 export interface TrackUpdateManyMutationInput {
@@ -1480,7 +1587,7 @@ export interface ModulePromise extends Promise<Module>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   info: () => Promise<String>;
-  track: <T = PostPromise>() => T;
+  track: <T = TrackPromise>() => T;
 }
 
 export interface ModuleSubscription
@@ -1489,7 +1596,42 @@ export interface ModuleSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   info: () => Promise<AsyncIterator<String>>;
-  track: <T = PostSubscription>() => T;
+  track: <T = TrackSubscription>() => T;
+}
+
+export interface Track {
+  id: ID_Output;
+  name: String;
+}
+
+export interface TrackPromise extends Promise<Track>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  modules: <T = FragmentableArray<Module>>(args?: {
+    where?: ModuleWhereInput;
+    orderBy?: ModuleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TrackSubscription
+  extends Promise<AsyncIterator<Track>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  modules: <T = Promise<AsyncIterator<ModuleSubscription>>>(args?: {
+    where?: ModuleWhereInput;
+    orderBy?: ModuleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface ModuleConnection {
@@ -1598,23 +1740,6 @@ export interface AggregatePostSubscription
   extends Promise<AsyncIterator<AggregatePost>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Track {
-  id: ID_Output;
-  name: String;
-}
-
-export interface TrackPromise extends Promise<Track>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface TrackSubscription
-  extends Promise<AsyncIterator<Track>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TrackConnection {
