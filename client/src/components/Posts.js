@@ -24,7 +24,7 @@ const PostContainer = styled.div`
 	@media (min-width: 375px) {
 		display: flex;
 		flex-direction: column;
-		padding: 0.5rem;
+		padding: 1rem;
 	}
 `;
 export const POSTS_QUERY = gql`
