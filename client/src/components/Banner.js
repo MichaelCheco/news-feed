@@ -8,6 +8,7 @@ const Div = styled.div`
 
 	@media (min-width: 375px) {
 		display: flex;
+		justify-content: space-between;
 	}
 `;
 const LogoWrapper = styled.div`
@@ -15,36 +16,6 @@ const LogoWrapper = styled.div`
 	width: 70%;
 
 	display: flex;
-`;
-const LogoStylesL = styled.div`
-	width: 14%;
-	padding: 4px;
-
-	text-align: center;
-	font-size: 2.3rem;
-	font-weight: bold;
-	background: ${props => props.theme.mediumBlue};
-	color: white;
-`;
-const LogoStylesS = styled.div`
-	width: 14%;
-	padding: 4px;
-
-	text-align: center;
-	font-size: 2.3rem;
-	font-weight: bold;
-	background: ${props => props.theme.lightBlue};
-	color: white;
-`;
-const LogoStylesN = styled.div`
-	width: 14%;
-	padding: 4px;
-
-	text-align: center;
-	font-size: 2.3rem;
-	font-weight: bold;
-	background: ${props => props.theme.red};
-	color: white;
 `;
 const P = styled.p`
 	font-size: 1.5rem;
@@ -97,4 +68,34 @@ class Banner extends Component {
 	}
 }
 
+const LogoStylesL = styled.div`
+	width: 14%;
+	padding: 4px;
+
+	text-align: center;
+	font-size: 2.3rem;
+	font-weight: bold;
+	background: ${props => props.theme.mediumBlue};
+	color: white;
+`;
+const LogoStylesS = styled.div`
+	width: 14%;
+	padding: 4px;
+
+	text-align: center;
+	font-size: 2.3rem;
+	font-weight: bold;
+	background: ${props => props.theme.lightBlue};
+	color: white;
+`;
+const LogoStylesN = styled.div`
+	width: 14%;
+	padding: 4px;
+
+	text-align: center;
+	font-size: 2.3rem;
+	font-weight: bold;
+	background: ${props => props.theme.red};
+	color: white;
+`;
 export default withRouter(Banner);
