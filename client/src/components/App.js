@@ -55,6 +55,16 @@ const Links = styled.div`
 			color: gray;
 		}
 	}
+	@media (min-width: 450px) {
+		a {
+			font-size: 1.7rem;
+		}
+	}
+	@media (min-width: 500px) {
+		a {
+			font-size: 2rem;
+		}
+	}
 `;
 const Girl = styled.img``;
 
